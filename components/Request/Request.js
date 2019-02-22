@@ -7,7 +7,7 @@ export default class Home extends React.Component {
 
     static navigationOptions = ({navigation}) => {
         return {
-            headerTitle: 'Advantage Home',
+            headerTitle: 'Place a Request',
         };
     };
 
@@ -23,7 +23,7 @@ export default class Home extends React.Component {
         return (
             <Container>
                 <Content contentContainerStyle={styles.container}>
-                    <Text>This tab is the home, possibly a description of services, etc.</Text>
+                    <Text>This tab will place a request</Text>
                 </Content>
             </Container>
         );
