@@ -16,10 +16,7 @@ export default class Home extends React.Component {
 
         this.state = {
             email: '',
-            desc: '',
-            timeline: '',
-            other: '',
-            refer: '',
+            password: '',
         };
     }
 
@@ -35,31 +32,15 @@ export default class Home extends React.Component {
         return (
             <Container>
                 <Content>
+                    <Text>Login</Text>
                     <Form>
                         <Item floatingLabel>
-                            <Label>Your Email</Label>
+                            <Label>Email</Label>
                             <Input onChangeText={(text) => this.setState({email: text})} />
-                            <Button
-                                transparent
-                                onPress={() => {
-                                    this.saveEmail();
-                                }}
-                                >
-                                <Text>Save Email</Text>
-                            </Button>
                         </Item>
                         <Item floatingLabel>
-                            <Label>Job Description</Label>
-                            <Input onChangeText={(text) => this.setState({desc: text})} />
-                        </Item>
-                        <Item floatingLabel>
-                            <Label>Timeline</Label>
-                            <Input onChangeText={(text) => this.setState({timeline: text})} />
-                        </Item>
-                        <Textarea style={styles.requestArea} rowSpan={8} placeholder="Other Information" bordered onChangeText={(text) => this.setState({other: text})} />
-                        <Item floatingLabel last>
-                            <Label>How did you hear about us?</Label>
-                            <Input onChangeText={(text) => this.setState({refer: text})} />
+                            <Label>Password</Label>
+                            <Input password onChangeText={(text) => this.setState({password: text})} />
                         </Item>
                         <Button
                             style={styles.saveButton}

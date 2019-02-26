@@ -2,6 +2,7 @@ import React from 'react';
 import { Footer, FooterTab, Button, Text, Icon,  } from 'native-base';
 import styles from './Styles';
 import {createAppContainer, createBottomTabNavigator, createStackNavigator} from 'react-navigation';
+import * as firebase from 'firebase';
 
 import Home from './components/Home/Home';
 import Request from './components/Request/Request';
@@ -42,6 +43,18 @@ const ListNavigator = createStackNavigator(
     },
   }
 );
+
+// Initialize Firebase
+const firebaseConfig = {
+    apiKey: "AIzaSyBE1mUsetgj9R3qidM5LCk7hvdl2zoo_G4",
+    authDomain: "advantage-home.firebaseapp.com",
+    databaseURL: "https://advantage-home.firebaseio.com",
+    projectId: "advantage-home",
+    storageBucket: "advantage-home.appspot.com",
+    messagingSenderId: "694885915476"
+};
+
+firebase.initializeApp(firebaseConfig);
 
 const TabNavigator = createBottomTabNavigator({
   Home: HomeNavigator,
