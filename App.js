@@ -1,12 +1,13 @@
 import React from 'react';
 import { Footer, FooterTab, Button, Text, Icon,  } from 'native-base';
 import styles from './Styles';
-import {createAppContainer, createBottomTabNavigator, createStackNavigator} from 'react-navigation';
+import {createSwitchNavigator, createAppContainer, createBottomTabNavigator, createStackNavigator} from 'react-navigation';
 import * as firebase from 'firebase';
 
 import Home from './components/Home/Home';
 import Request from './components/Request/Request';
 import List from './components/List/List';
+import Login from './components/Login/Login';
 
 const navigationOptions = ({navigation}) => {
   return {
@@ -44,6 +45,15 @@ const ListNavigator = createStackNavigator(
   }
 );
 
+const LoginNavigator = createSwitchNavigator(
+  {
+    Login: {
+      screen: Login,
+      navigationOptions: navigationOptions,
+    },
+  }
+);
+
 // Initialize Firebase
 const firebaseConfig = {
     apiKey: "AIzaSyBE1mUsetgj9R3qidM5LCk7hvdl2zoo_G4",
@@ -60,6 +70,7 @@ const TabNavigator = createBottomTabNavigator({
   Home: HomeNavigator,
   Request: RequestNavigator,
   List: ListNavigator,
+  Login: LoginNavigator,
 },{
   tabBarPosition: "bottom",
   tabBarComponent: props => {
@@ -93,6 +104,17 @@ const TabNavigator = createBottomTabNavigator({
             onPress={() => props.navigation.navigate("List")}>
             <Icon 
               name={props.navigation.state.index === 2 ? "person" : "person-outline"}
+              type="MaterialIcons"
+              style={{fontSize: 36, color: "black"}}
+            />
+            {/*<Text>About</Text>*/}
+          </Button>
+          <Button
+            vertical
+            transparent
+            onPress={() => props.navigation.navigate("Login")}>
+            <Icon 
+              name={props.navigation.state.index === 3 ? "person" : "person-outline"}
               type="MaterialIcons"
               style={{fontSize: 36, color: "black"}}
             />

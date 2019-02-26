@@ -14,6 +14,10 @@ export default StyleSheet.create({
     requestArea: {
         marginTop: 50,
         marginHorizontal: 20,
+    },
+    header: {
+        fontSize: 36,
+        marginBottom: 10,
     }
 });
   

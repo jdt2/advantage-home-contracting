@@ -24,35 +24,43 @@ export default class Home extends React.Component {
 
     }
 
-    submitForm = async () => {
-        
+    login() {
+
     }
 
     render() {
         return (
             <Container>
-                <Content>
-                    <Text>Login</Text>
-                    <Form>
-                        <Item floatingLabel>
-                            <Label>Email</Label>
-                            <Input onChangeText={(text) => this.setState({email: text})} />
+                <Content contentContainerStyle={styles.container}>
+                    <Text style={styles.header}>Login</Text>
+                    
+                        <Item regular>
+                            <Input 
+                                keyboardType="email-address"
+                                placeholder="Your Email"
+                                value={this.state.email}
+                                onChangeText={(text) => this.setState({email: text})}
+                            />
                         </Item>
-                        <Item floatingLabel>
-                            <Label>Password</Label>
-                            <Input password onChangeText={(text) => this.setState({password: text})} />
+                        <Item regular>
+                            <Input 
+                                secureTextEntry={true}
+                                placeholder="Password"
+                                value={this.state.password}
+                                onChangeText={(text) => this.setState({password: text})}
+                            />
                         </Item>
                         <Button
                             style={styles.saveButton}
                             rounded
                             full
                             onPress={() => {
-                                this.submitActionSteps();
+                                this.login();
                             }}
                             >
-                            <Text>Save</Text>
+                            <Text>Login</Text>
                         </Button>
-                    </Form>
+                    
                 </Content>
             </Container>
         );
