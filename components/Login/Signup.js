@@ -3,8 +3,9 @@ import { View } from 'react-native';
 import styles from '../../Styles';
 import {Button, Container, Content, Text, Form, Item, Input, Textarea, Label} from 'native-base';
 import * as firebase from 'firebase';
+import 'firebase/firestore';
 
-export default class Login extends React.Component {
+export default class Signup extends React.Component {
 
     static navigationOptions = ({navigation}) => {
         return {
@@ -15,7 +16,10 @@ export default class Login extends React.Component {
     constructor(props) {
         super(props);
 
+        this.ref = firebase.firestore().collection('users');
+
         this.state = {
+            name: '',
             email: '',
             password: '',
             errorMessage: null,
@@ -27,28 +31,45 @@ export default class Login extends React.Component {
     }
 
     login() {
-        // Firebase
-        firebase
-        .auth()
-        .signInWithEmailAndPassword(this.state.email, this.state.password)
-        .then(() => this.props.navigation.navigate("Home"))
-        .catch(error => this.setState({errorMessage: error.message}));
+        this.props.navigation.navigate("Login");
     }
 
     signup() {
-        this.props.navigation.navigate("Signup");
+        // Firebase
+        firebase
+        .auth()
+        .createUserWithEmailAndPassword(this.state.email, this.state.password)
+        .then((result) => {
+            console.log(result);
+            result.user.updateProfile({displayName: this.state.name}).then(() => {
+                this.ref.doc(result.user.uid).set({
+                    name: this.state.name,
+                    email: this.state.email,
+                    requests: [],
+                })
+                this.props.navigation.navigate("Home")
+            });
+        })
+        .catch(error => this.setState({errorMessage: error.message}));
     }
 
     render() {
         return (
             <Container style={styles.font}>
                 <Content contentContainerStyle={styles.container}>
-                    <Text style={styles.header}>Login</Text>
+                    <Text style={styles.header}>Sign Up</Text>
                     {/* Error Message */
-                    this.state.errorMessage && <Text style={styles.errorText}>
+                    this.state.errorMessage && <Text style={{color: 'red'}}>
                         {this.state.errorMessage}
                     </Text>
                     }
+                        <Item regular style={styles.loginInput}>
+                            <Input 
+                                placeholder="Name"
+                                value={this.state.name}
+                                onChangeText={(text) => this.setState({name: text})}
+                            />
+                        </Item>
                         <Item regular style={styles.loginInput}>
                             <Input 
                                 keyboardType="email-address"
@@ -70,19 +91,19 @@ export default class Login extends React.Component {
                             full
                             rounded
                             onPress={() => {
-                                this.login();
+                                this.signup();
                             }}
                             >
-                            <Text>Login</Text>
+                            <Text>Sign Up</Text>
                         </Button>
                         <Button
                             full
                             transparent
                             onPress={() => {
-                                this.signup();
+                                this.login();
                             }}
                             >
-                            <Text>Don't have an account?</Text>
+                            <Text>Already have an account?</Text>
                         </Button>
                     
                 </Content>

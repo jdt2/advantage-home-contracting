@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import styles from '../../Styles';
 import {Button, Container, Content, Text, Form, Item, Input, Textarea, Label} from 'native-base';
 
-export default class Home extends React.Component {
+export default class Request extends React.Component {
 
     static navigationOptions = ({navigation}) => {
         return {

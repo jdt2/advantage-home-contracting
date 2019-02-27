@@ -3,11 +3,14 @@ import { Footer, FooterTab, Button, Text, Icon,  } from 'native-base';
 import styles from './Styles';
 import {createSwitchNavigator, createAppContainer, createBottomTabNavigator, createStackNavigator} from 'react-navigation';
 import * as firebase from 'firebase';
+import GlobalFont from 'react-native-global-font';
 
 import Home from './components/Home/Home';
 import Request from './components/Request/Request';
 import List from './components/List/List';
 import Login from './components/Login/Login';
+import Signup from './components/Login/Signup';
+import Loading from './components/Loading/Loading';
 
 const navigationOptions = ({navigation}) => {
   return {
@@ -51,6 +54,10 @@ const LoginNavigator = createSwitchNavigator(
       screen: Login,
       navigationOptions: navigationOptions,
     },
+    Signup: {
+      screen: Signup,
+      navigationOptions: navigationOptions,
+    }
   }
 );
 
@@ -70,8 +77,8 @@ const TabNavigator = createBottomTabNavigator({
   Home: HomeNavigator,
   Request: RequestNavigator,
   List: ListNavigator,
-  Login: LoginNavigator,
 },{
+  initialRouteName: 'Home',
   tabBarPosition: "bottom",
   tabBarComponent: props => {
     return (
@@ -109,21 +116,30 @@ const TabNavigator = createBottomTabNavigator({
             />
             {/*<Text>About</Text>*/}
           </Button>
-          <Button
-            vertical
-            transparent
-            onPress={() => props.navigation.navigate("Login")}>
-            <Icon 
-              name={props.navigation.state.index === 3 ? "person" : "person-outline"}
-              type="MaterialIcons"
-              style={{fontSize: 36, color: "black"}}
-            />
-            {/*<Text>About</Text>*/}
-          </Button>
         </FooterTab>
       </Footer>
     );
   }
 })
 
-export default createAppContainer(TabNavigator);
+const SwitchNavigator = createSwitchNavigator({
+  Loading: Loading,
+  Main: TabNavigator,
+  Login: LoginNavigator,
+}, {
+  initialRouteName: 'Loading'
+});
+
+const Container = createAppContainer(SwitchNavigator);
+
+export default class App extends React.Component {
+  componentDidMount() {
+    GlobalFont.applyGlobal("Arial");
+  }
+
+  render() {
+    return (
+      <Container />
+    );
+  }
+}

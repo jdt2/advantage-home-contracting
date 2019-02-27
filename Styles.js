@@ -10,6 +10,8 @@ export default StyleSheet.create({
     saveButton: {
         marginTop: 20,
         marginBottom: 20,
+        marginLeft: 20,
+        marginRight: 20,
     },
     requestArea: {
         marginTop: 50,
@@ -18,6 +20,29 @@ export default StyleSheet.create({
     header: {
         fontSize: 36,
         marginBottom: 10,
+    },
+    loginInput: {
+        marginLeft: 20,
+        marginRight: 20,
+        marginBottom: 20,
+    },
+    errorText: {
+        color: 'red',
+        marginBottom: 10,
+        marginHorizontal: 10,
+        textAlign: 'center',
+    },
+    headerRight: {
+        paddingRight: 15,
+    },
+    tab: {
+        padding: 10,
+    },
+    center: {
+        textAlign: 'center',
+    },
+    serviceIcon: {
+        marginRight: 10,
     }
 });
   
