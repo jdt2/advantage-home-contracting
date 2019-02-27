@@ -15,7 +15,6 @@ export default class Request extends React.Component {
         super(props);
 
         this.state = {
-            email: '',
             desc: '',
             timeline: '',
             other: '',
@@ -36,30 +35,43 @@ export default class Request extends React.Component {
             <Container>
                 <Content>
                     <Form>
-                        <Item floatingLabel>
-                            <Label>Your Email</Label>
-                            <Input onChangeText={(text) => this.setState({email: text})} />
-                            <Button
-                                transparent
-                                onPress={() => {
-                                    this.saveEmail();
-                                }}
-                                >
-                                <Text>Save Email</Text>
-                            </Button>
-                        </Item>
-                        <Item floatingLabel>
-                            <Label>Job Description</Label>
-                            <Input onChangeText={(text) => this.setState({desc: text})} />
+                        <Item picker>
+                            <Picker
+                                mode="dropdown"
+                                iosIcon={<Icon name="arrow-down" />}
+                                style={{ width: undefined }}
+                                placeholder="Select a Job Description"
+                                placeholderStyle={{ color: "#bfc6ea" }}
+                                placeholderIconColor="#007aff"
+                                selectedValue={this.state.desc}
+                                onValueChange={(value) => this.setState({desc: value})}
+                            >
+                                <Picker.Item label="Tile Masonry" value="Tile Masonry" />
+                                <Picker.Item label="Roofing and Siding" />
+                                <Picker.Item label="Kitchen and Bathrooms" />
+                                <Picker.Item label="Decks and Porches" />
+                                <Picker.Item label="Construction" />
+                                <Picker.Item label="Remodeling (Interior)" />
+                                <Picker.Item label="Handyman" />
+                                <Picker.Item label="Painting" />
+                            </Picker>
                         </Item>
                         <Item floatingLabel>
                             <Label>Timeline</Label>
                             <Input onChangeText={(text) => this.setState({timeline: text})} />
                         </Item>
-                        <Textarea style={styles.requestArea} rowSpan={8} placeholder="Other Information" bordered onChangeText={(text) => this.setState({other: text})} />
+                        <Textarea
+                            style={styles.requestArea}
+                            rowSpan={8}
+                            placeholder="Other Information"
+                            bordered
+                            onChangeText={(text) => this.setState({other: text})}
+                        />
                         <Item floatingLabel last>
                             <Label>How did you hear about us?</Label>
-                            <Input onChangeText={(text) => this.setState({refer: text})} />
+                            <Input
+                                onChangeText={(text) => this.setState({refer: text})}
+                            />
                         </Item>
                         <Button
                             style={styles.saveButton}
