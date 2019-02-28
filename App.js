@@ -7,6 +7,7 @@ import GlobalFont from 'react-native-global-font';
 
 import Home from './components/Home/Home';
 import Request from './components/Request/Request';
+import CameraScreen from './components/Request/CameraScreen';
 import List from './components/List/List';
 import Login from './components/Login/Login';
 import Signup from './components/Login/Signup';
@@ -32,6 +33,10 @@ const HomeNavigator = createStackNavigator(
 
 const RequestNavigator = createStackNavigator(
   {
+    CameraScreen: {
+      screen: CameraScreen,
+      navigation: navigationOptions,
+    },
     Request: {
       screen: Request,
       navigationOptions: navigationOptions,
@@ -97,7 +102,7 @@ const TabNavigator = createBottomTabNavigator({
           <Button
             vertical
             transparent
-            onPress={() => props.navigation.navigate("Request")}>
+            onPress={() => props.navigation.navigate("CameraScreen")}>
             <Icon 
               name={props.navigation.state.index === 1 ? "add-circle" : "add-circle-outline"}
               type="MaterialIcons"

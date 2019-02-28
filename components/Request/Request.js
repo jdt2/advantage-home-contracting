@@ -52,7 +52,9 @@ export default class Request extends React.Component {
     }
 
     componentDidMount() {
-
+        const image = this.props.navigation.getParam('image', null);
+        console.log(image);
+        this.setState({image: image});
     }
 
     selectPicture = async () => {
@@ -101,23 +103,6 @@ export default class Request extends React.Component {
         return (
             <Container>
                 <Content>
-                    <View style={styles.container}>
-                        {this.state.image ? <Image style={styles.previewImage} source={{uri: this.state.image}}/> : <Image style={styles.previewImage}/>}
-                        <View style={styles.row}>
-                            <Button
-                                rounded
-                                onPress={this.selectPicture}
-                            >
-                                <Text>Choose a Photo</Text>
-                            </Button>
-                            <Button
-                                rounded
-                                onPress={this.takePicture}
-                            >
-                                <Text>Take a Photo</Text>
-                            </Button>
-                        </View>
-                    </View>
                     <Form>
                         <Item floatingLabel style={{marginBottom: 50,}}>
                             <Label>Job Description</Label>

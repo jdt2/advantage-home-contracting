@@ -48,10 +48,12 @@ export default StyleSheet.create({
         width: 300,
         height: 300,
         backgroundColor: 'grey',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     row: {
-        flex: 1,
         flexDirection: 'row',
+        marginTop: 20,
     }
 });
   
