@@ -14,7 +14,7 @@ export default StyleSheet.create({
         marginRight: 20,
     },
     requestArea: {
-        marginTop: 50,
+        marginTop: 20,
         marginHorizontal: 20,
     },
     header: {
@@ -43,6 +43,15 @@ export default StyleSheet.create({
     },
     serviceIcon: {
         marginRight: 10,
+    },
+    previewImage: {
+        width: 300,
+        height: 300,
+        backgroundColor: 'grey',
+    },
+    row: {
+        flex: 1,
+        flexDirection: 'row',
     }
 });
   

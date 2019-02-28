@@ -1,7 +1,8 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Image } from 'react-native';
 import styles from '../../Styles';
-import {Button, Container, Content, Text, Form, Item, Input, Textarea, Label} from 'native-base';
+import {Button, Container, Content, Text, Form, Item, Input, Textarea, Label, Picker, Icon, Left, Right, Body} from 'native-base';
+import {ImagePicker, Permissions} from 'expo';
 
 export default class Request extends React.Component {
 
@@ -14,11 +15,39 @@ export default class Request extends React.Component {
     constructor(props) {
         super(props);
 
+        this.pickerItems = [
+            "Tile Masonry",
+            "Roofing and Siding",
+            "Kitchen and Bathrooms",
+            "Decks and Porches",
+            "Construction",
+            "Remodeling (Interior)",
+            "Handyman",
+            "Painting"
+        ];
+
+        this.timelineItems = [
+            "Within a week",
+            "Within 2 weeks",
+            "Within 3 weeks",
+            "Within a month",
+        ];
+
+        this.referItems = [
+            "Radio",
+            "TV",
+            "Online",
+            "Friend",
+            "Other",
+        ];
+
         this.state = {
+            category: '',
             desc: '',
             timeline: '',
             other: '',
             refer: '',
+            image: null,
         };
     }
 
@@ -26,39 +55,124 @@ export default class Request extends React.Component {
 
     }
 
+    selectPicture = async () => {
+        await Permissions.askAsync(Permissions.CAMERA_ROLL);
+        const { cancelled, uri } = await ImagePicker.launchImageLibraryAsync({
+            aspect: 1,
+            allowsEditing: true,
+        });
+        if (!cancelled) this.setState({ image: uri });
+    };
+
+    takePicture = async () => {
+        await Permissions.askAsync(Permissions.CAMERA);
+        const { cancelled, uri } = await ImagePicker.launchCameraAsync({
+            allowsEditing: false,
+        });
+        this.setState({ image: uri });
+    };
+
     submitForm = async () => {
         
     }
 
     render() {
+        pickerStuff = [];
+        for(let i = 0; i < this.pickerItems.length; i++) {
+            pickerStuff.push(
+                <Picker.Item key={i} label={this.pickerItems[i]} value={this.pickerItems[i]} />
+            );            
+        }
+
+        timelineStuff = [];
+        for(let i = 0; i < this.timelineItems.length; i++) {
+            timelineStuff.push(
+                <Picker.Item key={i+this.pickerItems.length} label={this.timelineItems[i]} value={this.timelineItems[i]} />
+            );            
+        }
+
+        referStuff = [];
+        for(let i = 0; i < this.referItems.length; i++) {
+            referStuff.push(
+                <Picker.Item key={i+this.pickerItems.length+this.timelineItems.length} label={this.referItems[i]} value={this.referItems[i]} />
+            );            
+        }
+
         return (
             <Container>
                 <Content>
+                    <View style={styles.container}>
+                        {this.state.image ? <Image style={styles.previewImage} source={{uri: this.state.image}}/> : <Image style={styles.previewImage}/>}
+                        <View style={styles.row}>
+                            <Button
+                                rounded
+                                onPress={this.selectPicture}
+                            >
+                                <Text>Choose a Photo</Text>
+                            </Button>
+                            <Button
+                                rounded
+                                onPress={this.takePicture}
+                            >
+                                <Text>Take a Photo</Text>
+                            </Button>
+                        </View>
+                    </View>
                     <Form>
-                        <Item picker>
+                        <Item floatingLabel style={{marginBottom: 50,}}>
+                            <Label>Job Description</Label>
+                            <Input onChangeText={(text) => this.setState({desc: text})} />
+                        </Item>
+                        <Item fixedLabel>
+                            <Label>Category</Label>
                             <Picker
                                 mode="dropdown"
                                 iosIcon={<Icon name="arrow-down" />}
                                 style={{ width: undefined }}
-                                placeholder="Select a Job Description"
+                                placeholder="Select an Option"
                                 placeholderStyle={{ color: "#bfc6ea" }}
                                 placeholderIconColor="#007aff"
-                                selectedValue={this.state.desc}
-                                onValueChange={(value) => this.setState({desc: value})}
+                                selectedValue={this.state.category}
+                                onValueChange={(value) => {
+                                    this.setState({category: value})
+                                }}
                             >
-                                <Picker.Item label="Tile Masonry" value="Tile Masonry" />
-                                <Picker.Item label="Roofing and Siding" />
-                                <Picker.Item label="Kitchen and Bathrooms" />
-                                <Picker.Item label="Decks and Porches" />
-                                <Picker.Item label="Construction" />
-                                <Picker.Item label="Remodeling (Interior)" />
-                                <Picker.Item label="Handyman" />
-                                <Picker.Item label="Painting" />
+                                {pickerStuff}
                             </Picker>
                         </Item>
-                        <Item floatingLabel>
+                        <Item fixedLabel>
                             <Label>Timeline</Label>
-                            <Input onChangeText={(text) => this.setState({timeline: text})} />
+                            <Picker
+                                mode="dropdown"
+                                iosIcon={<Icon name="arrow-down" />}
+                                style={{ width: undefined }}
+                                placeholder="Select an Option"
+                                placeholderStyle={{ color: "#bfc6ea" }}
+                                placeholderIconColor="#007aff"
+                                selectedValue={this.state.timeline}
+                                onValueChange={(value) => {
+                                    this.setState({timeline: value})
+                                }}
+                            >
+                                {timelineStuff}
+                            </Picker>
+                        </Item>
+                        <Item fixedLabel last>
+                            <Label>How did you hear about us?</Label>
+                            <Picker
+                                mode="dropdown"
+                                iosIcon={<Icon name="arrow-down" />}
+                                style={{ width: undefined }}
+                                placeholder="Select an Option"
+                                placeholderStyle={{ color: "#bfc6ea" }}
+                                placeholderIconColor="#007aff"
+                                selectedValue={this.state.timeline}
+                                onValueChange={(value) => {
+                                    this.setState({refer: value})
+                                }}
+                            >
+                                {referStuff}
+                            </Picker>
                         </Item>
                         <Textarea
                             style={styles.requestArea}
@@ -67,21 +181,15 @@ export default class Request extends React.Component {
                             bordered
                             onChangeText={(text) => this.setState({other: text})}
                         />
-                        <Item floatingLabel last>
-                            <Label>How did you hear about us?</Label>
-                            <Input
-                                onChangeText={(text) => this.setState({refer: text})}
-                            />
-                        </Item>
                         <Button
                             style={styles.saveButton}
-                            rounded
                             full
+                            rounded
                             onPress={() => {
-                                this.submitActionSteps();
+                                this.submitForm();
                             }}
                             >
-                            <Text>Save</Text>
+                            <Text>Submit a Request</Text>
                         </Button>
                     </Form>
                 </Content>

@@ -176,7 +176,7 @@ export default class Home extends React.Component {
                                     latitudeDelta: 0.0922,
                                     longitudeDelta: 0.0421,
                                 }}
-                                style={{width: 300, height: 300, marginBottom: 10,}}
+                                style={{width: 250, height: 250, marginBottom: 10,}}
                             >
                                 <Marker
                                     coordinate={{
@@ -186,6 +186,7 @@ export default class Home extends React.Component {
                                     longitudeDelta: 0.0421,
                                     }}
                                     title="Advantage Home Contracting"
+                                    description="516 Brookway Drive"
                                 />
                             </MapView>
                             <Text style={styles.center}><Text style={{fontWeight: 'bold'}}>Our address</Text>
