@@ -15,7 +15,7 @@ export default StyleSheet.create({
     },
     requestArea: {
         marginTop: 20,
-        marginHorizontal: 20,
+        marginHorizontal: 40,
     },
     header: {
         fontSize: 36,
@@ -50,6 +50,13 @@ export default StyleSheet.create({
         backgroundColor: 'grey',
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    smallImage: {
+        width: 90,
+        height: 90,
+        marginTop: 10,
+        marginLeft: 10,
+        backgroundColor: 'grey',
     },
     row: {
         flexDirection: 'row',

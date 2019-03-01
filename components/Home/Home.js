@@ -24,7 +24,7 @@ export default class Home extends React.Component {
 
     componentDidMount() {
         const {currentUser} = firebase.auth();
-        console.log(currentUser);
+        //console.log(currentUser);
         this.setState({currentUser: currentUser});
     }
 

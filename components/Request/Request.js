@@ -53,7 +53,7 @@ export default class Request extends React.Component {
 
     componentDidMount() {
         const image = this.props.navigation.getParam('image', null);
-        console.log(image);
+        //console.log(image);
         this.setState({image: image});
     }
 
@@ -104,10 +104,15 @@ export default class Request extends React.Component {
             <Container>
                 <Content>
                     <Form>
-                        <Item floatingLabel style={{marginBottom: 50,}}>
-                            <Label>Job Description</Label>
-                            <Input onChangeText={(text) => this.setState({desc: text})} />
-                        </Item>
+                        <View style={{flex: 1, flexDirection: 'row'}}>
+                            {this.state.image ? <Image source={{uri: this.state.image}} style={styles.smallImage} /> : null}
+                            <Textarea
+                                style={[styles.requestArea, {marginLeft: 10,}]}
+                                rowSpan={3}
+                                placeholder="Job Description"
+                                onChangeText={(text) => this.setState({desc: text})}
+                            />
+                        </View>
                         <Item fixedLabel>
                             <Label>Category</Label>
                             <Picker
@@ -161,7 +166,7 @@ export default class Request extends React.Component {
                         </Item>
                         <Textarea
                             style={styles.requestArea}
-                            rowSpan={8}
+                            rowSpan={5}
                             placeholder="Other Information"
                             bordered
                             onChangeText={(text) => this.setState({other: text})}

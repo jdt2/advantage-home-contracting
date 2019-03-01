@@ -1,4 +1,5 @@
 import React from 'react';
+import {TouchableOpacity} from 'react-native';
 import { Footer, FooterTab, Button, Text, Icon,  } from 'native-base';
 import styles from './Styles';
 import {createSwitchNavigator, createAppContainer, createBottomTabNavigator, createStackNavigator} from 'react-navigation';
@@ -90,6 +91,8 @@ const TabNavigator = createBottomTabNavigator({
       <Footer>
         <FooterTab>
           <Button
+            activeOpacity={1.0}
+            vertical
             transparent
             onPress={() => props.navigation.navigate("Home")}>
             <Icon 
@@ -100,6 +103,7 @@ const TabNavigator = createBottomTabNavigator({
             {/*<Text>Home</Text>*/}
           </Button>
           <Button
+            activeOpacity={1.0}
             vertical
             transparent
             onPress={() => props.navigation.navigate("CameraScreen")}>
@@ -111,6 +115,7 @@ const TabNavigator = createBottomTabNavigator({
             {/*<Text>Place a Request</Text>*/}
           </Button>
           <Button
+            activeOpacity={1.0}
             vertical
             transparent
             onPress={() => props.navigation.navigate("List")}>

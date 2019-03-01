@@ -16,7 +16,7 @@ export default class Request extends React.Component {
                     style={styles.headerRight}
                     onPress={() => params.handleDone()}
                 >
-                    <Text>Done</Text>
+                    <Text>Next</Text>
                 </TouchableOpacity>
             )
         };
