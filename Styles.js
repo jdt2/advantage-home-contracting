@@ -61,6 +61,12 @@ export default StyleSheet.create({
     row: {
         flexDirection: 'row',
         marginTop: 20,
+    },
+    modal: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: 300,
+        width: 300,
     }
 });
   

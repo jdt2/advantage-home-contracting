@@ -1,8 +1,9 @@
 import React from 'react';
-import { View, Image, TouchableOpacity } from 'react-native';
+import { TouchableHighlight, View, Image, TouchableOpacity } from 'react-native';
 import styles from '../../Styles';
 import {Button, Container, Content, Text, Form, Item, Input, Textarea, Label, Picker, Icon, Left, Right, Body} from 'native-base';
-import {ImagePicker, Permissions} from 'expo';
+import { ImagePicker, Permissions} from 'expo';
+import Modal from 'react-native-modalbox';
 
 export default class Request extends React.Component {
 
@@ -33,7 +34,16 @@ export default class Request extends React.Component {
     }
 
     componentDidMount() {
+        this.props.navigation.addListener('didFocus', payload => {this.checkUploaded()});
+    }
 
+    checkUploaded() {
+        const uploaded = this.props.navigation.getParam('uploaded', false);
+        console.log(uploaded);
+        if(uploaded) {
+             this.setState({image: null});
+             this.refs.modal.open();
+        }
     }
 
     selectPicture = async () => {
@@ -61,7 +71,29 @@ export default class Request extends React.Component {
 
         return (
             <Container>
+
+                    <Modal
+                        style={styles.modal}
+                        ref={"modal"}
+                        position={"center"}
+                    >
+                        
+                            <Text style={{fontSize: 24, marginTop: 70,}}>Request Sent!</Text>
+                            <Text style={{fontSize: 24, marginTop: 20,}}>Expect an email soon!</Text>
+                            <Button
+                                onPress={() => {
+                                    this.refs.modal.close();
+                                }}
+                                full
+                                transparent
+                                style={{marginTop: 50}}
+                            >
+                                <Text style={{textAlign: 'left'}}>Ok</Text>
+                            </Button>
+                        
+                    </Modal>
                 <Content contentContainerStyle={styles.container}>
+                    
                     {this.state.image ?
                         <Image style={styles.previewImage} source={{uri: this.state.image}}/> : 
                         <View style={styles.previewImage}>

@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/bin/node /usr/local/bin/yarn add react-native-global-font
+  /usr/local/bin/node /usr/local/bin/yarn remove react-native-modalbox
 
 PATH: 
   /Library/Frameworks/Python.framework/Versions/3.7/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/jessedu/npm/bin
@@ -14,7 +14,7 @@ Platform:
   darwin x64
 
 Trace: 
-  Error: EACCES: permission denied, unlink '/Users/jessedu/Documents/advantage-home-contracting/node_modules/.bin/color-support'
+  Error: EACCES: permission denied, unlink '/Users/jessedu/Documents/advantage-home-contracting/node_modules/.bin/atob'
 
 npm manifest: 
   {
@@ -32,6 +32,7 @@ npm manifest:
       "native-base": "^2.11.0",
       "react": "16.5.0",
       "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
+      "react-native-global-font": "^1.0.2",
       "react-navigation": "^3.3.0"
     },
     "devDependencies": {
@@ -2045,7 +2046,7 @@ Lockfile:
       lodash.get "^4.4.2"
       parse-json "^4.0.0"
   
-  create-react-class@^15.6.3:
+  create-react-class@^15.6.0, create-react-class@^15.6.3:
     version "15.6.3"
     resolved "https://registry.yarnpkg.com/create-react-class/-/create-react-class-15.6.3.tgz#2d73237fb3f970ae6ebe011a9e66f46dbca80036"
     integrity sha512-M+/3Q6E6DLO6Yx3OwrWjwHBnvfXXYA7W+dFjt/ZDBemHO1DDZhsalX/NUtnTYclN6GfnBDRh4qRHjcDHmlJBJg==
@@ -3710,6 +3711,11 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/lodash.throttle/-/lodash.throttle-4.1.1.tgz#c23e91b710242ac70c37f1e1cda9274cc39bf2f4"
     integrity sha1-wj6RtxAkKscMN/HhzaknTMOb8vQ=
   
+  lodash.wrap@^4.1.1:
+    version "4.1.1"
+    resolved "https://registry.yarnpkg.com/lodash.wrap/-/lodash.wrap-4.1.1.tgz#9c3770947a821ec6978a93571e1a6179afcd7fc8"
+    integrity sha1-nDdwlHqCHsaXipNXHhphea/Nf8g=
+  
   lodash.zipobject@^4.1.3:
     version "4.1.3"
     resolved "https://registry.yarnpkg.com/lodash.zipobject/-/lodash.zipobject-4.1.3.tgz#b399f5aba8ff62a746f6979bf20b214f964dbef8"
@@ -4918,6 +4924,13 @@ Lockfile:
       invariant "^2.2.2"
       prop-types "^15.5.10"
   
+  react-native-global-font@^1.0.2:
+    version "1.0.2"
+    resolved "https://registry.yarnpkg.com/react-native-global-font/-/react-native-global-font-1.0.2.tgz#acb6a56879e4a82673e44c91b91d3ccd6c386381"
+    integrity sha512-3wvczbcVIecLEvTYIjQ+A3t6TrHdJGYgchmKa9Br5+yrBiOuoWGif31zlUyYvVneBm2mpGIKDKZzMbM3BAOyuw==
+    dependencies:
+      lodash.wrap "^4.1.1"
+  
   react-native-iphone-x-helper@^1.0.3:
     version "1.2.0"
     resolved "https://registry.yarnpkg.com/react-native-iphone-x-helper/-/react-native-iphone-x-helper-1.2.0.tgz#9f8a376eb00bc712115abff4420318a0063fa796"
@@ -4934,6 +4947,14 @@ Lockfile:
   react-native-maps@expo/react-native-maps#v0.22.1-exp.0:
     version "0.22.1"
     resolved "https://codeload.github.com/expo/react-native-maps/tar.gz/e6f98ff7272e5d0a7fe974a41f28593af2d77bb2"
+  
+  react-native-modalbox@^1.7.1:
+    version "1.7.1"
+    resolved "https://registry.yarnpkg.com/react-native-modalbox/-/react-native-modalbox-1.7.1.tgz#cdb623ecd1cbe8699a450217c25b2d6666dc63e6"
+    integrity sha512-Jqn12MKQaT5OSb1uMAEeDQF02xHS+WWdgKl55ecoIknrDy+FIoC3fXHMEoRZH6agADDg9eVBqx8w+P7+EwXTbQ==
+    dependencies:
+      create-react-class "^15.6.0"
+      prop-types "^15.5.10"
   
   react-native-reanimated@1.0.0-alpha.11:
     version "1.0.0-alpha.11"

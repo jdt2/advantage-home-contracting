@@ -9,10 +9,11 @@ import GlobalFont from 'react-native-global-font';
 import Home from './components/Home/Home';
 import Request from './components/Request/Request';
 import CameraScreen from './components/Request/CameraScreen';
-import List from './components/List/List';
+import Profile from './components/List/Profile';
 import Login from './components/Login/Login';
 import Signup from './components/Login/Signup';
 import Loading from './components/Loading/Loading';
+import ProfileItem from './components/List/ProfileItem';
 
 const navigationOptions = ({navigation}) => {
   return {
@@ -47,10 +48,14 @@ const RequestNavigator = createStackNavigator(
 
 const ListNavigator = createStackNavigator(
   {
-    List: {
-      screen: List,
+    Profile: {
+      screen: Profile,
       navigationOptions: navigationOptions,
     },
+    ProfileItem: {
+      screen: ProfileItem,
+      navigationOptions: navigationOptions,
+    }
   }
 );
 

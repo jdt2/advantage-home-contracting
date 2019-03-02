@@ -1,8 +1,11 @@
 import React from 'react';
-import { View, Image } from 'react-native';
+import { View, Image, ActivityIndicator } from 'react-native';
 import styles from '../../Styles';
 import {Button, Container, Content, Text, Form, Item, Input, Textarea, Label, Picker, Icon, Left, Right, Body} from 'native-base';
 import {ImagePicker, Permissions} from 'expo';
+import * as firebase from 'firebase';
+import 'firebase/firestore';
+import uuid from 'uuid';
 
 export default class Request extends React.Component {
 
@@ -41,6 +44,9 @@ export default class Request extends React.Component {
             "Other",
         ];
 
+        this.requestRef = firebase.firestore().collection("requests");
+        this.userRef = firebase.firestore().collection("users");
+
         this.state = {
             category: '',
             desc: '',
@@ -48,6 +54,7 @@ export default class Request extends React.Component {
             other: '',
             refer: '',
             image: null,
+            uploading: false,
         };
     }
 
@@ -75,7 +82,62 @@ export default class Request extends React.Component {
     };
 
     submitForm = async () => {
-        
+
+        // upload image
+        // uri stored in this.state.image
+        try {
+            this.setState({uploading: true});
+            
+            const uploadUri = this.state.image;
+
+            // upload using xmlhttprequest
+            const blob = await new Promise((resolve, reject) => {
+                const xhr = new XMLHttpRequest();
+                xhr.onload = function() {
+                    resolve(xhr.response);
+                }
+                xhr.onerror = function(e) {
+                    console.log(e);
+                    reject(new TypeError("Network Request Failed"));
+                }
+                xhr.responseType = 'blob';
+                xhr.open('GET', uploadUri, true);
+                xhr.send(null);
+            })
+
+            const ref = firebase.storage().ref().child(uuid.v4());
+            const snapshot = await ref.put(blob);
+            blob.close();
+            const downloadURL = await snapshot.ref.getDownloadURL();
+            console.log(downloadURL);
+
+            userId = firebase.auth().currentUser.uid;
+
+            const doc_ref = await this.requestRef.add({
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                jobDesc: this.state.desc,
+                category: this.state.category,
+                timeline: this.state.timeline,
+                refer: this.state.refer,
+                other: this.state.other,
+                userId: userId,
+                imageURL: downloadURL,
+            })
+
+            const doc_id = doc_ref.id;
+            await this.userRef.doc(userId).update({
+                requests: firebase.firestore.FieldValue.arrayUnion(doc_id),
+            })
+
+        } catch (e) {
+            console.error(e);
+            alert("Upload failed...");
+        } finally {
+            this.setState({uploading: false});
+
+            // navigate back to camera screen
+            this.props.navigation.navigate("CameraScreen", {uploaded: true});
+        }
     }
 
     render() {
@@ -111,6 +173,7 @@ export default class Request extends React.Component {
                                 rowSpan={3}
                                 placeholder="Job Description"
                                 onChangeText={(text) => this.setState({desc: text})}
+                                editable={!this.state.uploading}
                             />
                         </View>
                         <Item fixedLabel>
@@ -126,6 +189,7 @@ export default class Request extends React.Component {
                                 onValueChange={(value) => {
                                     this.setState({category: value})
                                 }}
+                                enabled={!this.state.uploading}
                             >
                                 {pickerStuff}
                             </Picker>
@@ -143,6 +207,7 @@ export default class Request extends React.Component {
                                 onValueChange={(value) => {
                                     this.setState({timeline: value})
                                 }}
+                                enabled={!this.state.uploading}
                             >
                                 {timelineStuff}
                             </Picker>
@@ -156,10 +221,11 @@ export default class Request extends React.Component {
                                 placeholder="Select an Option"
                                 placeholderStyle={{ color: "#bfc6ea" }}
                                 placeholderIconColor="#007aff"
-                                selectedValue={this.state.timeline}
+                                selectedValue={this.state.refer}
                                 onValueChange={(value) => {
                                     this.setState({refer: value})
                                 }}
+                                enabled={!this.state.uploading}
                             >
                                 {referStuff}
                             </Picker>
@@ -170,17 +236,29 @@ export default class Request extends React.Component {
                             placeholder="Other Information"
                             bordered
                             onChangeText={(text) => this.setState({other: text})}
+                            enabled={!this.state.uploading}
                         />
-                        <Button
-                            style={styles.saveButton}
-                            full
-                            rounded
-                            onPress={() => {
-                                this.submitForm();
-                            }}
-                            >
-                            <Text>Submit a Request</Text>
-                        </Button>
+                        {this.state.uploading ? 
+                            <Button
+                                style={styles.saveButton}
+                                disabled
+                                full
+                                rounded
+                                >
+                                <Text>Uploading Request...</Text>
+                                <ActivityIndicator size="large" />
+                            </Button>
+                            : <Button
+                                style={styles.saveButton}
+                                full
+                                rounded
+                                onPress={() => {
+                                    this.submitForm();
+                                }}
+                                >
+                                <Text>Submit a Request</Text>
+                            </Button>
+                        }
                     </Form>
                 </Content>
             </Container>
