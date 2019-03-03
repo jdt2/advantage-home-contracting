@@ -57,7 +57,7 @@ export default class Signup extends React.Component {
         return (
             <Container style={styles.font}>
                 <Content contentContainerStyle={styles.container}>
-                    <Text style={styles.header}>Sign Up</Text>
+                    <Text style={[styles.header, styles.center]}>Sign Up for Advantage Home</Text>
                     {/* Error Message */
                     this.state.errorMessage && <Text style={{color: 'red'}}>
                         {this.state.errorMessage}
@@ -103,7 +103,7 @@ export default class Signup extends React.Component {
                                 this.login();
                             }}
                             >
-                            <Text>Already have an account?</Text>
+                            <Text>Already have an account? Log In</Text>
                         </Button>
                     
                 </Content>

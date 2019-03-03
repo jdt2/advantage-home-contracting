@@ -1,10 +1,11 @@
 import React from 'react';
 import { View, Image, Linking, ScrollView } from 'react-native';
 import styles from '../../Styles';
-import {Container, Content, Text, Button, Tab, Tabs, CardItem, Card, Body,Left, Right,ScrollableTab} from 'native-base';
+import {Container, Content, Text, Button, Tab, Tabs, CardItem, Card, Body,Left, Right,ScrollableTab, Header} from 'native-base';
 import * as firebase from 'firebase';
 import MapView from 'react-native-maps';
 import {Marker} from 'react-native-maps';
+import { Status } from 'expo-background-fetch';
 
 export default class Home extends React.Component {
 
@@ -31,7 +32,7 @@ export default class Home extends React.Component {
     tab1() {
         return (
             <View>
-                <Card>
+                <Card style={styles.cardSpace}>
                     <CardItem header bordered style={styles.container}>
                         <Text style={{fontSize: 36, color: '#5987a7'}}>Our Mission</Text>
                     </CardItem>
@@ -41,7 +42,7 @@ export default class Home extends React.Component {
                         </Body>
                     </CardItem>
                 </Card>
-                <Card>
+                <Card style={styles.cardSpace}>
                     <CardItem header bordered style={styles.container}>
                         <Text style={{fontSize: 36, color: '#5987a7'}}>What We Can Do</Text>
                     </CardItem>
@@ -51,7 +52,7 @@ export default class Home extends React.Component {
                         </Body>
                     </CardItem>
                 </Card>
-                <Card>
+                <Card style={styles.cardSpace}>
                     <CardItem header bordered style={styles.container}>
                         <Text style={{fontSize: 36, color: '#5987a7'}}>Free Estimate</Text>
                     </CardItem>
@@ -68,7 +69,7 @@ export default class Home extends React.Component {
     tab2() {
         return (
             <View>
-                <Card>
+                <Card style={styles.cardSpace}>
                     <CardItem header bordered style={styles.container}>
                         <Image style={styles.serviceIcon} source={require('../../assets/serviceIcons/level-1.png')} />
                         <Text style={{fontSize: 36, color: '#5987a7'}}>Tile Masonry</Text>
@@ -79,7 +80,7 @@ export default class Home extends React.Component {
                         </Body>
                     </CardItem>
                 </Card>
-                <Card>
+                <Card style={styles.cardSpace}>
                     <CardItem header bordered style={styles.container}>
                         <Image style={styles.serviceIcon} source={require('../../assets/serviceIcons/level-2.png')} />
                         <Text style={{fontSize: 36, color: '#5987a7'}}>Roofing and Siding</Text>
@@ -90,7 +91,7 @@ export default class Home extends React.Component {
                         </Body>
                     </CardItem>
                 </Card>
-                <Card>
+                <Card style={styles.cardSpace}>
                     <CardItem header bordered style={styles.container}>
                         <Image style={styles.serviceIcon} source={require('../../assets/serviceIcons/level-3.png')} />
                         <Text style={{fontSize: 36, color: '#5987a7'}}>Kitchen and Bathrooms</Text>
@@ -101,7 +102,7 @@ export default class Home extends React.Component {
                         </Body>
                     </CardItem>
                 </Card>
-                <Card>
+                <Card style={styles.cardSpace}>
                     <CardItem header bordered style={styles.container}>
                         <Image style={styles.serviceIcon} source={require('../../assets/serviceIcons/level-4.png')} />
                         <Text style={{fontSize: 36, color: '#5987a7'}}>Decks and Porches</Text>
@@ -112,7 +113,7 @@ export default class Home extends React.Component {
                         </Body>
                     </CardItem>
                 </Card>
-                <Card>
+                <Card style={styles.cardSpace}>
                     <CardItem header bordered style={styles.container}>
                         <Image style={styles.serviceIcon} source={require('../../assets/serviceIcons/level-5.png')} />
                         <Text style={{fontSize: 36, color: '#5987a7'}}>Construction</Text>
@@ -123,7 +124,7 @@ export default class Home extends React.Component {
                         </Body>
                     </CardItem>
                 </Card>
-                <Card>
+                <Card style={styles.cardSpace}>
                     <CardItem header bordered style={styles.container}>
                         <Image style={styles.serviceIcon} source={require('../../assets/serviceIcons/level-6.png')} />
                         <Text style={{fontSize: 36, color: '#5987a7'}}>Remodeling (Interior)</Text>
@@ -134,7 +135,7 @@ export default class Home extends React.Component {
                         </Body>
                     </CardItem>
                 </Card>
-                <Card>
+                <Card style={styles.cardSpace}>
                     <CardItem header bordered style={styles.container}>
                         <Image style={styles.serviceIcon} source={require('../../assets/serviceIcons/level-7.png')} />
                         <Text style={{fontSize: 36, color: '#5987a7'}}>Handyman</Text>
@@ -163,7 +164,7 @@ export default class Home extends React.Component {
     tab3() {
         return (
             <View>
-                <Card>
+                <Card style={styles.cardSpace}>
                     <CardItem header bordered style={styles.container}>
                         <Text style={{fontSize: 36, color: '#5987a7'}}>Where Are We?</Text>
                     </CardItem>
@@ -215,12 +216,14 @@ export default class Home extends React.Component {
     }
 
     render() {
+        // background color of logo: #3A5872 
+
         return (
             <Container>
-                
+                    <View style={{backgroundColor: "white", height: 20}} />
                     <Image
-                        source={require('../../assets/logo.png')}
-                        style={{height: 200,width: '100%'}}
+                        source={require('../../assets/logoCrop.png')}
+                        style={{height: 170,width: '100%'}}
                     />
                     <Tabs
                         locked

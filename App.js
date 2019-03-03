@@ -24,11 +24,10 @@ const navigationOptions = ({navigation}) => {
   };
 }
 
-const HomeNavigator = createStackNavigator(
+const HomeNavigator = createSwitchNavigator(
   {
     Home: {
       screen: Home,
-      navigationOptions: navigationOptions,
     },
   }
 );

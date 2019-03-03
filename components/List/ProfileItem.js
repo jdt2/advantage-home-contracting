@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, TouchableOpacity, Image } from 'react-native';
 import styles from '../../Styles';
-import {Container, Content, Text, List, ListItem, Thumbnail, Left, Body, Right, Button, Card, CardItem} from 'native-base';
+import {Header, Container, Content, Text, List, ListItem, Thumbnail, Left, Body, Right, Button, Card, CardItem} from 'native-base';
 import * as firebase from 'firebase';
 import moment from 'moment';
 
@@ -43,7 +43,9 @@ export default class ProfileItem extends React.Component {
         return (
             <Container>
                 <Content>
-                    <Image style={styles.previewImage} source={item ? {uri: item.imageURL} : require('../../assets/loading.gif')} />
+                    <View style={[styles.container, {marginTop: 20,}]}>
+                        <Image style={styles.previewImage} source={item ? {uri: item.imageURL} : require('../../assets/loading.gif')} />
+                    </View>
                     <Card transparent>
                         <CardItem>
                             <Left>

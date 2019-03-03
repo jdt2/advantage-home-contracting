@@ -43,6 +43,8 @@ export default StyleSheet.create({
     },
     serviceIcon: {
         marginRight: 10,
+        width: 60,
+        height: 60,
     },
     previewImage: {
         width: 300,
@@ -67,6 +69,9 @@ export default StyleSheet.create({
         alignItems: 'center',
         height: 300,
         width: 300,
+    },
+    cardSpace: {
+        marginBottom: 20,
     }
 });
   

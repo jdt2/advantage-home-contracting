@@ -43,7 +43,7 @@ export default class Login extends React.Component {
         return (
             <Container style={styles.font}>
                 <Content contentContainerStyle={styles.container}>
-                    <Text style={styles.header}>Login</Text>
+                    <Text style={[styles.header, styles.center]}>Login to Advantage Home</Text>
                     {/* Error Message */
                     this.state.errorMessage && <Text style={styles.errorText}>
                         {this.state.errorMessage}
@@ -82,7 +82,7 @@ export default class Login extends React.Component {
                                 this.signup();
                             }}
                             >
-                            <Text>Don't have an account?</Text>
+                            <Text>Don't have an account? Sign Up</Text>
                         </Button>
                     
                 </Content>
