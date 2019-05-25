@@ -12,10 +12,11 @@ export default StyleSheet.create({
         marginBottom: 20,
         marginLeft: 20,
         marginRight: 20,
+        backgroundColor: '#3A5872'
     },
     requestArea: {
         marginTop: 20,
-        marginHorizontal: 40,
+        marginHorizontal: 20,
     },
     header: {
         fontSize: 36,
@@ -47,8 +48,8 @@ export default StyleSheet.create({
         height: 60,
     },
     previewImage: {
-        width: 300,
-        height: 300,
+        width: 250,
+        height: 250,
         backgroundColor: 'grey',
         alignItems: 'center',
         justifyContent: 'center',

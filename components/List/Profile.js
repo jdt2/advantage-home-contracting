@@ -27,6 +27,9 @@ export default class Profile extends React.Component {
 
         this.props.navigation.setParams({handleLogout: this.logout});
 
+        this.userRef = firebase.firestore().collection('users');
+        this.requestRef = firebase.firestore().collection('requests');
+
         this.state = {
             currentUser: null,
             requests: [],
@@ -46,9 +49,6 @@ export default class Profile extends React.Component {
         const {currentUser} = firebase.auth();
         this.setState({currentUser: currentUser});
 
-        this.userRef = firebase.firestore().collection('users');
-        this.requestRef = firebase.firestore().collection('requests');
-
         this.getData();
     }
 
@@ -58,7 +58,7 @@ export default class Profile extends React.Component {
 
         let itemIds = [];
         let allItems = [];
-        const data_ref = await this.requestRef.where("userId", "==", uid).get().then((doc) => {
+        const data_ref = await this.requestRef.orderBy('timestamp', 'desc').where("userId", "==", uid).get().then((doc) => {
             doc.forEach((result) => {
                 const data = result.data();
                 data["id"] = result.id;

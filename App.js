@@ -88,7 +88,7 @@ const TabNavigator = createBottomTabNavigator({
   Request: RequestNavigator,
   List: ListNavigator,
 },{
-  initialRouteName: 'Home',
+  initialRouteName: 'Request',
   tabBarPosition: "bottom",
   tabBarComponent: props => {
     return (

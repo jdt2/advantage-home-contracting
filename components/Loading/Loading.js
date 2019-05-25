@@ -29,9 +29,9 @@ export default class Home extends React.Component {
     render() {
         return (
             <Container>
-                <Content contentContainerStyle={styles.container}>
-                    <Text style={styles.header}>Loading</Text>
-                    <ActivityIndicator size="large" />
+                <Content contentContainerStyle={[styles.container, {backgroundColor: '#3A5872'}]}>
+                    <Text style={[styles.header, {color: 'white'}]}>Loading</Text>
+                    <ActivityIndicator color='white' size="large" />
                 </Content>
             </Container>
         );

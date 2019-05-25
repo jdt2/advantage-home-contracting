@@ -101,6 +101,17 @@ export default class Home extends React.Component {
                 </Card>
                 <Card style={styles.cardSpace}>
                     <CardItem header bordered style={styles.container}>
+                        <Image style={styles.serviceIcon} source={require('../../assets/serviceIcons/level-5.png')} />
+                        <Text style={{fontSize: 36, color: '#5987a7'}}>Design and{"\n"}Build</Text>
+                    </CardItem>
+                    <CardItem>
+                        <Body style={styles.serviceIcon} style={styles.container}>
+                            <Text>We can help design and build your addition, garage, sunroom, screen or front porch or whatever you have in mind. We assist from concept, to drawings, acquiring permits and HOA approval to the final building inspection. Our difference of using employees and not subcontractors allows us to deliver a project in half the time of our competition.</Text>
+                        </Body>
+                    </CardItem>
+                </Card>
+                <Card style={styles.cardSpace}>
+                    <CardItem header bordered style={styles.container}>
                         <Image style={styles.serviceIcon} source={require('../../assets/serviceIcons/level-6.png')} />
                         <Text style={{fontSize: 36, color: '#5987a7'}}>Interior Remodeling{/*  (Baths, Kitchen, Basements and more) */}</Text>
                     </CardItem>
@@ -271,19 +282,20 @@ export default class Home extends React.Component {
                     </View>
                     <Tabs
                         locked
+                        tabBarUnderlineStyle={{backgroundColor: '#3A5872'}}
                         renderTabBar={() => <ScrollableTab />}
                     >
-                        <Tab heading="The Advantage Difference" style={styles.tab}>
+                        <Tab heading="The Advantage Difference" style={styles.tab} activeTextStyle={{color: '#3A5872'}}>
                             <ScrollView>
                                 {this.tab1()}
                             </ScrollView>
                         </Tab>
-                        <Tab heading="Services" style={styles.tab}>
+                        <Tab heading="Services" style={styles.tab} activeTextStyle={{color: '#3A5872'}}>
                             <ScrollView>
                                 {this.tab2()}
                             </ScrollView>
                         </Tab>
-                        <Tab heading="About Us" style={styles.tab}>
+                        <Tab heading="About Us" style={styles.tab} activeTextStyle={{color: '#3A5872'}}>
                             <ScrollView>
                                 {this.tab3()}
                             </ScrollView>
