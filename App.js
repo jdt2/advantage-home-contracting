@@ -36,12 +36,17 @@ const RequestNavigator = createStackNavigator(
   {
     CameraScreen: {
       screen: CameraScreen,
-      navigation: navigationOptions,
     },
-    Request: {
+    /* Request: {
       screen: Request,
       navigationOptions: navigationOptions,
-    },
+    }, */
+  }, {
+    headerMode: 'none',
+    navigationOptions: {
+      headerVisible: false,
+      header: null
+    }
   }
 );
 

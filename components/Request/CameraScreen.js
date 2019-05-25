@@ -1,12 +1,13 @@
 import React from 'react';
-import { TouchableHighlight, View, Image, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { TouchableHighlight, View, Image, TouchableOpacity, ActivityIndicator, StatusBar } from 'react-native';
 import styles from '../../Styles';
-import {Button, Container, Content, Text, Form, Item, Input, Textarea, Label, Picker, Icon, Left, Right, Body, Footer} from 'native-base';
+import {Button, Container, Content, Text, Form, Item, Input, Textarea, Label, Picker, Icon, Left, Right, Body, Footer, Header} from 'native-base';
 import { ImagePicker, Permissions} from 'expo';
 import Modal from 'react-native-modalbox';
 import * as firebase from 'firebase';
 import 'firebase/firestore';
 import uuid from 'uuid';
+import { Status } from 'expo-background-fetch';
 
 export default class Request extends React.Component {
 
@@ -14,7 +15,7 @@ export default class Request extends React.Component {
         const {params = {}} = navigation.state
 
         return {
-            headerTitle: 'Free Estimate Request',
+            /* headerTitle: 'Free Estimate Request', */
             /* headerRight: (
                 <TouchableOpacity
                     style={styles.headerRight}
@@ -132,10 +133,10 @@ export default class Request extends React.Component {
             const doc_ref = await this.requestRef.add({
                 timestamp: firebase.firestore.FieldValue.serverTimestamp(),
                 jobDesc: this.state.desc,
-                category: this.state.category,
-                timeline: this.state.timeline,
+                //category: this.state.category,
+                //timeline: this.state.timeline,
                 refer: this.state.refer,
-                other: this.state.other,
+                //other: this.state.other,
                 userId: userId,
                 imageURL: downloadURL,
             })
@@ -182,7 +183,6 @@ export default class Request extends React.Component {
 
         return (
             <Container>
-
                     <Modal
                         style={styles.modal}
                         ref={"modal"}
@@ -204,19 +204,21 @@ export default class Request extends React.Component {
                         
                     </Modal>
                 <Content>
-                    
-                    <Image style={{alignSelf: 'center', width: 346, height: '25%', resizeMode: 'contain'}} source={require('../../assets/logo.png')} />
+
+                    <Image style={{marginTop: 20, alignSelf: 'center', width: 346, height: '25%', resizeMode: 'contain'}} source={require('../../assets/logo.png')} />
+
+                    <Text style={[styles.header, {alignSelf: 'center', marginBottom: 20}]}>Free Estimate Request</Text>
 
                     <Form>
                         <Textarea
-                            style={[styles.requestArea, {marginTop: 0,}]}
+                            style={[styles.requestArea, {marginTop: 0,marginBottom: 20}]}
                             rowSpan={3}
                             bordered
                             placeholder="Give a brief description of work/project needed"
                             onChangeText={(text) => this.setState({desc: text})}
                             editable={!this.state.uploading}
                         />
-                        <Item fixedLabel>
+                        {/* <Item fixedLabel>
                             <Label>Category</Label>
                             <Picker
                                 mode="dropdown"
@@ -251,7 +253,7 @@ export default class Request extends React.Component {
                             >
                                 {timelineStuff}
                             </Picker>
-                        </Item>
+                        </Item> */}
                         <Item fixedLabel last>
                             <Label>How did you hear about us?</Label>
                             <Picker
@@ -270,21 +272,21 @@ export default class Request extends React.Component {
                                 {referStuff}
                             </Picker>
                         </Item>
-                        <Textarea
+                        {/* <Textarea
                             style={[styles.requestArea, {marginHorizontal: 20}]}
                             rowSpan={5}
                             placeholder="Other Information"
                             bordered
                             onChangeText={(text) => this.setState({other: text})}
                             enabled={!this.state.uploading}
-                        />
+                        /> */}
                         
                         {/* Image preview */}
                         <View style={{alignItems: 'center', justifyContent: 'center', marginTop: 20}}>
                             {this.state.image ?
                                 <Image style={styles.previewImage} source={{uri: this.state.image}}/> : 
                                 <View style={styles.previewImage}>
-                                    <Text style={{textAlign: 'center', fontSize: 24, color:'white'}}>Include Pictures If Helpful</Text>
+                                    <Text style={{textAlign: 'center', fontSize: 24, color:'white'}}>Include Pictures if Helpful</Text>
                                 </View>
                             }
                             <View style={styles.row}>

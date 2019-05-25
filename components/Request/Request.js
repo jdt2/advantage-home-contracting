@@ -7,11 +7,12 @@ import * as firebase from 'firebase';
 import 'firebase/firestore';
 import uuid from 'uuid';
 
+// DEPRECATED
 export default class Request extends React.Component {
 
     static navigationOptions = ({navigation}) => {
         return {
-            headerTitle: 'Place a Request',
+            //headerTitle: 'Place a Request',
         };
     };
 

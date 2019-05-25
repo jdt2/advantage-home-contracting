@@ -58,7 +58,7 @@ export default class Profile extends React.Component {
 
         let itemIds = [];
         let allItems = [];
-        const data_ref = await this.requestRef.orderBy('timestamp', 'desc').where("userId", "==", uid).get().then((doc) => {
+        const data_ref = await this.requestRef.where("userId", "==", uid).orderBy("timestamp","desc").get().then((doc) => {
             doc.forEach((result) => {
                 const data = result.data();
                 data["id"] = result.id;
