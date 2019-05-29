@@ -78,7 +78,7 @@ export default class Home extends React.Component {
                 <Card style={styles.cardSpace}>
                     <CardItem header bordered style={styles.container}>
                         {/* <Image style={styles.serviceIcon} source={require('../../assets/serviceIcons/level-7.png')} /> */}
-                        <Text style={{fontSize: 36, color: '#5987a7'}}>Handyman</Text>
+                        <Text style={styles.cardHeader}>Handyman</Text>
                     </CardItem>
                     <CardItem>
                         <Body style={styles.serviceIcon} style={styles.container}>
@@ -89,7 +89,7 @@ export default class Home extends React.Component {
                 <Card>
                     <CardItem header bordered style={styles.container}>
                         {/* <Image style={styles.serviceIcon} source={require('../../assets/serviceIcons/level-8.png')} /> */}
-                        <Text style={{fontSize: 36, color: '#5987a7'}}>Painting</Text>
+                        <Text style={styles.cardHeader}>Painting</Text>
                     </CardItem>
                     <CardItem>
                         <Body style={styles.serviceIcon} style={styles.container}>
@@ -102,7 +102,7 @@ export default class Home extends React.Component {
                 <Card style={styles.cardSpace}>
                     <CardItem header bordered style={styles.container}>
                         {/* <Image style={styles.serviceIcon} source={require('../../assets/serviceIcons/level-5.png')} /> */}
-                        <Text style={{fontSize: 36, color: '#5987a7'}}>Design and{"\n"}Build</Text>
+                        <Text style={styles.cardHeader}>Design and{"\n"}Build</Text>
                     </CardItem>
                     <CardItem>
                         <Body style={styles.serviceIcon} style={styles.container}>
@@ -113,7 +113,7 @@ export default class Home extends React.Component {
                 <Card style={styles.cardSpace}>
                     <CardItem header bordered style={styles.container}>
                         {/* <Image style={styles.serviceIcon} source={require('../../assets/serviceIcons/level-6.png')} /> */}
-                        <Text style={{fontSize: 36, color: '#5987a7'}}>Interior Remodeling{/*  (Baths, Kitchen, Basements and more) */}</Text>
+                        <Text style={styles.cardHeader}>Interior Remodeling{/*  (Baths, Kitchen, Basements and more) */}</Text>
                     </CardItem>
                     <CardItem>
                         <Body style={styles.serviceIcon} style={styles.container}>
@@ -125,7 +125,7 @@ export default class Home extends React.Component {
                 <Card style={styles.cardSpace}>
                     <CardItem header bordered style={styles.container}>
                         {/* <Image style={styles.serviceIcon} source={require('../../assets/serviceIcons/level-4.png')} /> */}
-                        <Text style={{fontSize: 36, color: '#5987a7'}}>Decks and Porches</Text>
+                        <Text style={styles.cardHeader}>Decks and Porches</Text>
                     </CardItem>
                     <CardItem>
                         <Body style={styles.serviceIcon} style={styles.container}>
@@ -136,7 +136,7 @@ export default class Home extends React.Component {
                 <Card style={styles.cardSpace}>
                     <CardItem header bordered style={styles.container}>
                         {/* <Image style={styles.serviceIcon} source={require('../../assets/serviceIcons/level-2.png')} /> */}
-                        <Text style={{fontSize: 36, color: '#5987a7'}}>Roofing and Siding</Text>
+                        <Text style={styles.cardHeader}>Roofing and Siding</Text>
                     </CardItem>
                     <CardItem>
                         <Body style={styles.container}>
@@ -147,7 +147,7 @@ export default class Home extends React.Component {
                 <Card style={styles.cardSpace}>
                     <CardItem header bordered style={styles.container}>
                         {/* <Image style={styles.serviceIcon} source={require('../../assets/serviceIcons/level-1.png')} /> */}
-                        <Text style={{fontSize: 36, color: '#5987a7'}}>Tile</Text>
+                        <Text style={styles.cardHeader}>Tile</Text>
                     </CardItem>
                     <CardItem>
                         <Body style={styles.container}>
@@ -158,7 +158,7 @@ export default class Home extends React.Component {
                 <Card style={styles.cardSpace}>
                     <CardItem header bordered style={styles.container}>
                         {/* <Image style={styles.serviceIcon} source={require('../../assets/serviceIcons/level-1.png')} /> */}
-                        <Text style={{fontSize: 36, color: '#5987a7'}}>Masonry</Text>
+                        <Text style={styles.cardHeader}>Masonry</Text>
                     </CardItem>
                     <CardItem>
                         <Body style={styles.container}>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity, RefreshControl } from 'react-native';
 import styles from '../../Styles';
 import {Container, Content, Text, List, ListItem, Thumbnail, Left, Body, Right, Button} from 'native-base';
 import * as firebase from 'firebase';
@@ -33,6 +33,7 @@ export default class Profile extends React.Component {
         this.state = {
             currentUser: null,
             requests: [],
+            refreshing: false,
         }
     }
 
@@ -52,6 +53,13 @@ export default class Profile extends React.Component {
         this.getData();
     }
 
+    onRefresh() {
+        this.setState({refreshing: true});
+        this.getData().then(() => {
+            this.setState({refreshing: false});
+        })
+    }
+
     getData = async () => {
         // get uid
         const uid = firebase.auth().currentUser.uid;
@@ -65,7 +73,7 @@ export default class Profile extends React.Component {
                 allItems.push(data);
             });
         })
-        console.log(allItems);
+        //console.log(allItems);
         this.setState({requests: allItems});
     }
 
@@ -80,12 +88,13 @@ export default class Profile extends React.Component {
                         <Thumbnail square source={{uri: item.imageURL}}  />
                     </Left>
                     <Body>
-                        <Text>
+                        {/* <Text>
                             {item.category}
-                        </Text>
-                        <Text note numberOfLines={1}>
+                        </Text> */}
+                        <Text numberOfLines={2}>
                             {item.jobDesc}
                         </Text>
+                        <Text></Text>
                     </Body>
                     <Right>
                         <Button
@@ -103,7 +112,12 @@ export default class Profile extends React.Component {
 
         return (
             <Container>
-                <Content>
+                <Content refreshControl={
+                    <RefreshControl
+                        refreshing={this.state.refreshing}
+                        onRefresh={this.onRefresh.bind(this)}
+                    />
+                }>
                     <List>
                         {listItems}
                     </List>

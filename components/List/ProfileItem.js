@@ -63,7 +63,7 @@ export default class ProfileItem extends React.Component {
                                 <Text style={{textAlign: 'right'}}>{this.getDate()}</Text>
                             </Right>
                         </CardItem>
-                        <CardItem>
+                        {/* <CardItem>
                             <Left>
                                 <Text>Category:</Text>
                             </Left>
@@ -78,7 +78,7 @@ export default class ProfileItem extends React.Component {
                             <Right>
                                 <Text style={{textAlign: 'right'}}>{item ? item.timeline : ""}</Text>
                             </Right>
-                        </CardItem>
+                        </CardItem> */}
                         <CardItem>
                             <Left>
                                 <Text>Reference:</Text>
@@ -87,14 +87,14 @@ export default class ProfileItem extends React.Component {
                                 <Text style={{textAlign: 'right'}}>{item ? item.refer : ""}</Text>
                             </Right>
                         </CardItem>
-                        <CardItem>
+                        {/* <CardItem>
                             <Left>
                                 <Text>Other Info:</Text>
                             </Left>
                             <Right>
                                 <Text style={{textAlign: 'right'}}>{item ? item.other : ""}</Text>
                             </Right>
-                        </CardItem>
+                        </CardItem> */}
                     </Card>
                 </Content>
             </Container>

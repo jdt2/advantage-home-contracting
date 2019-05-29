@@ -2,12 +2,13 @@ import React from 'react';
 import { TouchableHighlight, View, Image, TouchableOpacity, ActivityIndicator, StatusBar } from 'react-native';
 import styles from '../../Styles';
 import {Button, Container, Content, Text, Form, Item, Input, Textarea, Label, Picker, Icon, Left, Right, Body, Footer, Header} from 'native-base';
-import { ImagePicker, Permissions} from 'expo';
+import { ImagePicker, Permissions, ImagePickerManager } from 'expo';
 import Modal from 'react-native-modalbox';
 import * as firebase from 'firebase';
 import 'firebase/firestore';
 import uuid from 'uuid';
 import { Status } from 'expo-background-fetch';
+import { NativeModulesProxy } from 'expo-core';
 
 export default class Request extends React.Component {
 
@@ -77,14 +78,14 @@ export default class Request extends React.Component {
 
     checkUploaded() {
         // TODO: Finish resetting everything
-        this.setState({image: null});
+        this.setState({image: null, desc: '', refer: ''});
         this.refs.modal.open();
     }
 
     selectPicture = async () => {
         await Permissions.askAsync(Permissions.CAMERA_ROLL);
         const { cancelled, uri } = await ImagePicker.launchImageLibraryAsync({
-            aspect: 1,
+            //aspect: 1,
             allowsEditing: true,
         });
         if (!cancelled) this.setState({ image: uri });
@@ -93,10 +94,38 @@ export default class Request extends React.Component {
     takePicture = async () => {
         await Permissions.askAsync(Permissions.CAMERA);
         const { cancelled, uri } = await ImagePicker.launchCameraAsync({
-            allowsEditing: false,
+            allowsEditing: true,
         });
         if (!cancelled) this.setState({ image: uri });
     };
+
+    uploadPhoto(uri, uploadUri) {
+        return new Promise(async (res, rej) => {
+            const response = await fetch(uri);
+            const blob = await response.blob();
+        
+            const ref = firebase.storage().ref(uploadUri);
+            const unsubscribe = ref.put(blob).on(
+              'state_changed',
+              state => {},
+              err => {
+                unsubscribe();
+                rej(err);
+              },
+              async () => {
+                unsubscribe();
+                const url = await ref.getDownloadURL();
+                res(url);
+              },
+            );
+        });
+    }
+
+    uploadPhotoAsync = async uri => {
+        const collectionName = "requests";
+        const path = `${collectionName}/${firebase.auth().currentUser.uid}/${uuid.v4()}.jpg`;
+        return this.uploadPhoto(uri, path);
+    }
 
     submitForm = async () => {
 
@@ -104,10 +133,18 @@ export default class Request extends React.Component {
         // uri stored in this.state.image
         try {
             this.setState({uploading: true});
+            const userId = firebase.auth().currentUser.uid;
             
             const uploadUri = this.state.image;
+            console.log(this.state.image);
 
             // upload using xmlhttprequest
+            const formData = new FormData();
+            const name = uploadUri.substring(uploadUri.lastIndexOf("/")+1);
+            const type = "image/" + (name.split('.').pop() || "jpg")
+            console.log(type);
+            console.log(name);
+            formData.append("file", {uri: uploadUri, name: name, type: type});
             const blob = await new Promise((resolve, reject) => {
                 const xhr = new XMLHttpRequest();
                 xhr.onload = function() {
@@ -118,17 +155,25 @@ export default class Request extends React.Component {
                     reject(new TypeError("Network Request Failed"));
                 }
                 xhr.responseType = 'blob';
-                xhr.open('GET', uploadUri, true);
-                xhr.send(null);
-            })
 
-            const ref = firebase.storage().ref().child(uuid.v4());
+
+                xhr.open('GET', uploadUri, true);
+                console.log("here");
+                xhr.send(formData);
+            })
+            const collectionName = "requests";
+            const path = `${collectionName}/${firebase.auth().currentUser.uid}/${uuid.v4()}.jpg`;
+            //const ref = firebase.storage().ref().child(uuid.v4());
+            const ref = firebase.storage().ref().child(path);
             const snapshot = await ref.put(blob);
             blob.close();
+
             const downloadURL = await snapshot.ref.getDownloadURL();
+            //const downloadURL = await this.uploadPhotoAsync(uploadUri);
+            // Using download URL, we can store into firestore
             console.log(downloadURL);
 
-            userId = firebase.auth().currentUser.uid;
+            
 
             const doc_ref = await this.requestRef.add({
                 timestamp: firebase.firestore.FieldValue.serverTimestamp(),
@@ -152,9 +197,6 @@ export default class Request extends React.Component {
         } finally {
             this.setState({uploading: false});
             this.checkUploaded();
-
-            // navigate back to camera screen
-            this.props.navigation.navigate("CameraScreen", {uploaded: true});
         }
     }
 
@@ -190,7 +232,14 @@ export default class Request extends React.Component {
                     >
                         
                             <Text style={{fontSize: 24, marginTop: 70,}}>Request Sent!</Text>
-                            <Text style={{fontSize: 18, marginTop: 20, textAlign: 'center', marginHorizontal: 10}}>Expect an email soon and you can see your request in profile tab!</Text>
+                            <Text style={{fontSize: 18, marginTop: 20, textAlign: 'center', marginHorizontal: 10}}>Expect an email soon and you can view your request in 
+                                {"\n"}
+                                <Icon 
+                                    name={"person-outline"}
+                                    type={"MaterialIcons"}
+                                    style={{fontSize: 48}}
+                                />
+                            </Text>
                             <Button
                                 onPress={() => {
                                     this.refs.modal.close();
@@ -207,11 +256,12 @@ export default class Request extends React.Component {
 
                     <Image style={{marginTop: 20, alignSelf: 'center', width: 346, height: '25%', resizeMode: 'contain'}} source={require('../../assets/logo.png')} />
 
-                    <Text style={[styles.header, {alignSelf: 'center', marginBottom: 20}]}>Free Estimate Request</Text>
+                    <Text style={[styles.header, {alignSelf: 'center', marginBottom: 20, textAlign: 'center'}]}>Free Estimate Request</Text>
 
                     <Form>
                         <Textarea
                             style={[styles.requestArea, {marginTop: 0,marginBottom: 20}]}
+                            value={this.state.desc}
                             rowSpan={3}
                             bordered
                             placeholder="Give a brief description of work/project needed"

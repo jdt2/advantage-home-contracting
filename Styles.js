@@ -73,6 +73,12 @@ export default StyleSheet.create({
     },
     cardSpace: {
         marginBottom: 20,
+    },
+    // Home
+    cardHeader: {
+        fontSize: 36,
+        color: '#5987a7',
+        textAlign: 'center',
     }
 });
   
