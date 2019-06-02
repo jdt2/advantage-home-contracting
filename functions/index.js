@@ -25,13 +25,13 @@ const functions = require('firebase-functions')
 const nodemailer = require('nodemailer')
 //const admin = require('firebase-admin')
 
-const gmailEmail = functions.config().gmail.email;
-const gmailPassword = functions.config().gmail.password;
+const hotmailEmail = functions.config().hotmail.email;
+const hotmailPassword = functions.config().hotmail.password;
 const mailTransport = nodemailer.createTransport({
-    service: 'gmail',
+    service: 'hotmail',
     auth: {
-        user: gmailEmail,
-        pass: gmailPassword,
+        user: hotmailEmail,
+        pass: hotmailPassword,
     },
 });
 
@@ -43,9 +43,10 @@ const APP_NAME = 'Advantage-Home';
  * Sends a welcome email to new user.
  */
 // [START onCreateTrigger]
-exports.sendEmail = functions.firestore.document('users/{uid}').onCreate((event) => {
-    const snapshot = event.data
-    const user = snapshot.val();
+exports.sendEmail = functions.firestore.document('users/{uid}').onCreate((snap, context) => {
+    //const snapshot = event.data;
+    console.log(snap);
+    const user = snap.data();
 
     return sendEmail(user.email);
 });

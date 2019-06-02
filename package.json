@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "expo": "^32.0.0",
-    "firebase": "^5.8.4",
+    "firebase": "6.0.2",
     "moment": "^2.24.0",
     "native-base": "^2.11.0",
     "nodemailer": "^6.2.1",

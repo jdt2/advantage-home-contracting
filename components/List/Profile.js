@@ -1,16 +1,16 @@
 import React from 'react';
 import { View, TouchableOpacity, RefreshControl } from 'react-native';
 import styles from '../../Styles';
-import {Container, Content, Text, List, ListItem, Thumbnail, Left, Body, Right, Button} from 'native-base';
+import { Container, Content, Text, List, ListItem, Thumbnail, Left, Body, Right, Button } from 'native-base';
 import * as firebase from 'firebase';
 
 export default class Profile extends React.Component {
 
-    static navigationOptions = ({navigation}) => {
-        const {params = {}} = navigation.state
+    static navigationOptions = ({ navigation }) => {
+        const { params = {} } = navigation.state
 
         return {
-            headerTitle: 'Your Orders',
+            headerTitle: 'Your Requests',
             headerRight: (
                 <TouchableOpacity
                     style={styles.headerRight}
@@ -25,7 +25,7 @@ export default class Profile extends React.Component {
     constructor(props) {
         super(props);
 
-        this.props.navigation.setParams({handleLogout: this.logout});
+        this.props.navigation.setParams({ handleLogout: this.logout });
 
         this.userRef = firebase.firestore().collection('users');
         this.requestRef = firebase.firestore().collection('requests');
@@ -47,16 +47,16 @@ export default class Profile extends React.Component {
     }
 
     componentDidMount() {
-        const {currentUser} = firebase.auth();
-        this.setState({currentUser: currentUser});
+        const { currentUser } = firebase.auth();
+        this.setState({ currentUser: currentUser });
 
         this.getData();
     }
 
     onRefresh() {
-        this.setState({refreshing: true});
+        this.setState({ refreshing: true });
         this.getData().then(() => {
-            this.setState({refreshing: false});
+            this.setState({ refreshing: false });
         })
     }
 
@@ -66,7 +66,7 @@ export default class Profile extends React.Component {
 
         let itemIds = [];
         let allItems = [];
-        const data_ref = await this.requestRef.where("userId", "==", uid).orderBy("timestamp","desc").get().then((doc) => {
+        const data_ref = await this.requestRef.where("userId", "==", uid).orderBy("timestamp", "desc").get().then((doc) => {
             doc.forEach((result) => {
                 const data = result.data();
                 data["id"] = result.id;
@@ -74,18 +74,18 @@ export default class Profile extends React.Component {
             });
         })
         //console.log(allItems);
-        this.setState({requests: allItems});
+        this.setState({ requests: allItems });
     }
 
     render() {
 
         let listItems = [];
-        for(let i = 0; i < this.state.requests.length; i++) {
+        for (let i = 0; i < this.state.requests.length; i++) {
             let item = this.state.requests[i];
             listItems.push(
                 <ListItem key={i} thumbnail>
                     <Left>
-                        <Thumbnail square source={{uri: item.imageURL}}  />
+                        <Thumbnail square source={{ uri: item.imageURL }} />
                     </Left>
                     <Body>
                         {/* <Text>
@@ -100,7 +100,7 @@ export default class Profile extends React.Component {
                         <Button
                             transparent
                             onPress={() => {
-                                this.props.navigation.navigate("ProfileItem", {item: this.state.requests[i]});
+                                this.props.navigation.navigate("ProfileItem", { item: this.state.requests[i] });
                             }}
                         >
                             <Text>View</Text>

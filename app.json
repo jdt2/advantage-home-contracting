@@ -23,7 +23,13 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.advantagehandy.advantagehome",
+      "config": {
+        "googleSignIn": {
+          "reservedClientId": "com.googleusercontent.apps.694885915476-9oqmlpj23bf3db8c7sg8hmiiqubbbcnr"
+        }
+      }
     }
   }
 }

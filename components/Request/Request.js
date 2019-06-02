@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, Image, ActivityIndicator } from 'react-native';
 import styles from '../../Styles';
-import {Button, Container, Content, Text, Form, Item, Input, Textarea, Label, Picker, Icon, Left, Right, Body} from 'native-base';
-import {ImagePicker, Permissions} from 'expo';
+import { Button, Container, Content, Text, Form, Item, Input, Textarea, Label, Picker, Icon, Left, Right, Body } from 'native-base';
+import { ImagePicker, Permissions } from 'expo';
 import * as firebase from 'firebase';
 import 'firebase/firestore';
 import uuid from 'uuid';
@@ -10,7 +10,7 @@ import uuid from 'uuid';
 // DEPRECATED
 export default class Request extends React.Component {
 
-    static navigationOptions = ({navigation}) => {
+    static navigationOptions = ({ navigation }) => {
         return {
             //headerTitle: 'Place a Request',
         };
@@ -62,7 +62,7 @@ export default class Request extends React.Component {
     componentDidMount() {
         const image = this.props.navigation.getParam('image', null);
         //console.log(image);
-        this.setState({image: image});
+        this.setState({ image: image });
     }
 
     selectPicture = async () => {
@@ -87,17 +87,17 @@ export default class Request extends React.Component {
         // upload image
         // uri stored in this.state.image
         try {
-            this.setState({uploading: true});
-            
+            this.setState({ uploading: true });
+
             const uploadUri = this.state.image;
 
             // upload using xmlhttprequest
             const blob = await new Promise((resolve, reject) => {
                 const xhr = new XMLHttpRequest();
-                xhr.onload = function() {
+                xhr.onload = function () {
                     resolve(xhr.response);
                 }
-                xhr.onerror = function(e) {
+                xhr.onerror = function (e) {
                     console.log(e);
                     reject(new TypeError("Network Request Failed"));
                 }
@@ -110,7 +110,7 @@ export default class Request extends React.Component {
             const snapshot = await ref.put(blob);
             blob.close();
             const downloadURL = await snapshot.ref.getDownloadURL();
-            console.log(downloadURL);
+            //console.log(downloadURL);
 
             userId = firebase.auth().currentUser.uid;
 
@@ -134,39 +134,39 @@ export default class Request extends React.Component {
             console.error(e);
             alert("Upload failed...");
         } finally {
-            this.setState({uploading: false});
+            this.setState({ uploading: false });
 
             // navigate back to camera screen
-            this.props.navigation.navigate("CameraScreen", {uploaded: true});
+            this.props.navigation.navigate("CameraScreen", { uploaded: true });
         }
     }
 
     render() {
         pickerStuff = [];
-        for(let i = 0; i < this.pickerItems.length; i++) {
+        for (let i = 0; i < this.pickerItems.length; i++) {
             pickerStuff.push(
                 <Picker.Item key={i} label={this.pickerItems[i]} value={this.pickerItems[i]} />
-            );            
+            );
         }
 
         timelineStuff = [];
-        for(let i = 0; i < this.timelineItems.length; i++) {
+        for (let i = 0; i < this.timelineItems.length; i++) {
             timelineStuff.push(
-                <Picker.Item key={i+this.pickerItems.length} label={this.timelineItems[i]} value={this.timelineItems[i]} />
-            );            
+                <Picker.Item key={i + this.pickerItems.length} label={this.timelineItems[i]} value={this.timelineItems[i]} />
+            );
         }
 
         referStuff = [];
-        for(let i = 0; i < this.referItems.length; i++) {
+        for (let i = 0; i < this.referItems.length; i++) {
             referStuff.push(
-                <Picker.Item key={i+this.pickerItems.length+this.timelineItems.length} label={this.referItems[i]} value={this.referItems[i]} />
-            );            
+                <Picker.Item key={i + this.pickerItems.length + this.timelineItems.length} label={this.referItems[i]} value={this.referItems[i]} />
+            );
         }
 
         return (
             <Container>
                 <Content>
-                    
+
                 </Content>
             </Container>
         );

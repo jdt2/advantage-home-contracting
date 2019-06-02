@@ -23,6 +23,7 @@ const APP_NAME = 'Advantage-Home';
 // [START onCreateTrigger]
 exports.sendEmail = functions.firestore.document('users/{uid}').onCreate((event) => {
     const snapshot = event.data
+    console.log(snapshot);
     const user = snapshot.val();
 
     return sendEmail(user.email);

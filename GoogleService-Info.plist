@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>694885915476-9oqmlpj23bf3db8c7sg8hmiiqubbbcnr.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.694885915476-9oqmlpj23bf3db8c7sg8hmiiqubbbcnr</string>
+	<key>API_KEY</key>
+	<string>AIzaSyC996LwmXgpy4N1L5Fv0Q-U0NFOeIuja7s</string>
+	<key>GCM_SENDER_ID</key>
+	<string>694885915476</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.advantagehandy.advantagehome</string>
+	<key>PROJECT_ID</key>
+	<string>advantage-home</string>
+	<key>STORAGE_BUCKET</key>
+	<string>advantage-home.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:694885915476:ios:868eab78ec8a6486</string>
+	<key>DATABASE_URL</key>
+	<string>https://advantage-home.firebaseio.com</string>
+</dict>
+</plist>
