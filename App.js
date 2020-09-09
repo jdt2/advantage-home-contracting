@@ -7,7 +7,7 @@ import * as firebase from 'firebase';
 import GlobalFont from 'react-native-global-font';
 
 import Home from './components/Home/Home';
-import Request from './components/Request/Request';
+import Request from './components/Request/Request.deprecated';
 import CameraScreen from './components/Request/CameraScreen';
 import Profile from './components/List/Profile';
 import Login from './components/Login/Login';

@@ -8,7 +8,7 @@
       "ios",
       "android"
     ],
-    "version": "1.0.0",
+    "version": "1.1.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -29,6 +29,10 @@
         "googleSignIn": {
           "reservedClientId": "com.googleusercontent.apps.694885915476-9oqmlpj23bf3db8c7sg8hmiiqubbbcnr"
         }
+      },
+      "infoPlist": {
+        "NSCameraUsageDescription": "This app uses the camera to take a picture of a home improvement problem for a free estimate.",
+        "NSPhotoLibraryUsageDescription": "This app uses the photo library to upload an existing photo for a free estimate."
       }
     }
   }

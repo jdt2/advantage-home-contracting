@@ -1,0 +1,18 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h1>
+    Free Estimate ID: {{ id }}
+  </h1>
+  <img width="300" alt="Angular Logo" src="{{(item | async)?.imageURL}}">
+  <h3>Job Description: {{(item | async)?.jobDesc}}</h3>
+  <h3>Refer: {{(item | async)?.refer}}</h3>
+  <h3>Timestamp: {{(item | async)?.timestamp.toDate() | date : 'MM/dd/yyyy h:mm a'}}</h3>
+  <h3>Update Status:
+    <select class='form-control' [(ngModel)]="selected">
+      <option *ngFor="let status of statuses">
+        {{status}}
+      </option>
+    </select>
+  </h3>
+  <button type="submit" class="btn btn-default" (click)="submit()">Update Status</button>
+</div>

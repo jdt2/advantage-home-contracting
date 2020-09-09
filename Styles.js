@@ -79,6 +79,37 @@ export default StyleSheet.create({
         fontSize: 36,
         color: '#5987a7',
         textAlign: 'center',
+    },
+    // Progress Bar
+    progressBar: {
+        flex: 1,
+        flexDirection: 'row',
+        padding: 0,
+    },
+    startProgress: {
+        width: 50,
+        height: 40,
+        borderWidth: 3,
+        borderTopLeftRadius: 20,
+        borderBottomLeftRadius: 20,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    middleProgress: {
+        width: 50,
+        height: 40,
+        borderWidth: 3,
+        borderLeftWidth: 0,
+    },
+    endProgress: {
+        width: 47,
+        height: 40,
+        borderWidth: 3,
+        borderLeftWidth: 0,
+        borderTopRightRadius: 20,
+        borderBottomRightRadius: 20,
+    },
+    filledProgress: {
+        backgroundColor: 'lawngreen',
     }
 });
-  

@@ -4,6 +4,8 @@ import styles from '../../Styles';
 import { Header, Container, Content, Text, List, ListItem, Thumbnail, Left, Body, Right, Button, Card, CardItem } from 'native-base';
 import * as firebase from 'firebase';
 import moment from 'moment';
+import * as Progress from 'react-native-progress';
+//import { SegmentedProgress } from 'react-native-segmented-progress';
 
 export default class ProfileItem extends React.Component {
 
@@ -27,6 +29,7 @@ export default class ProfileItem extends React.Component {
     componentDidMount() {
         const item = this.props.navigation.getParam('item', null);
         this.setState({ item: item });
+        console.log(item);
     }
 
     getDate() {
@@ -39,6 +42,23 @@ export default class ProfileItem extends React.Component {
 
     render() {
         const item = this.state.item;
+
+        // get progress
+        let progress = 0;
+        if (item) {
+
+            if (item.status === "Submitted") {
+                progress = 0;
+            } else if (item.status === "Reviewed") {
+                progress = 0.25;
+            } else if (item.status === "Estimate") {
+                progress = 0.5;
+            } else if (item.status === "Worked On") {
+                progress = 0.75;
+            } else if (item.status === "Finished") {
+                progress = 1.0;
+            }
+        }
 
         return (
             <Container>
@@ -96,6 +116,37 @@ export default class ProfileItem extends React.Component {
                             </Right>
                         </CardItem> */}
                     </Card>
+                    <View style={[styles.container, { textAlign: 'center' }]}>
+                        <Text>Status: {item ? item.status : ""}</Text>
+                        {/* <Progress.Bar
+                            animated
+                            progress={progress}
+                            width={300}
+                            height={25}
+                        /> */}
+                        <View style={styles.progressBar}>
+                            <View
+                                style={[styles.startProgress, progress >= 0 ? styles.filledProgress : null]}
+                            >
+                            </View>
+                            <View
+                                style={[styles.middleProgress, progress >= 0.25 ? styles.filledProgress : null]}
+                            />
+                            <View
+                                style={[styles.middleProgress, progress >= 0.5 ? styles.filledProgress : null]}
+                            />
+                            <View
+                                style={[styles.middleProgress, progress >= 0.75 ? styles.filledProgress : null]}
+                            />
+                            <View
+                                style={[styles.endProgress, progress >= 1 ? styles.filledProgress : null]}
+                            />
+                        </View>
+                        {/* <SegmentedProgress
+                            numberOfSteps={5}
+                            activeStep={2}
+                        /> */}
+                    </View>
                 </Content>
             </Container>
         );

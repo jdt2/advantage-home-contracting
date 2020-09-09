@@ -1,15 +1,15 @@
 import React from 'react';
 import { View, Image, Linking, ScrollView } from 'react-native';
 import styles from '../../Styles';
-import {Container, Content, Text, Button, Tab, Tabs, CardItem, Card, Body,Left, Right,ScrollableTab, Header} from 'native-base';
+import { Container, Content, Text, Button, Tab, Tabs, CardItem, Card, Body, Left, Right, ScrollableTab, Header } from 'native-base';
 import * as firebase from 'firebase';
 import MapView from 'react-native-maps';
-import {Marker} from 'react-native-maps';
+import { Marker } from 'react-native-maps';
 import { Status } from 'expo-background-fetch';
 
 export default class Home extends React.Component {
 
-    static navigationOptions = ({navigation}) => {
+    static navigationOptions = ({ navigation }) => {
         return {
             headerTitle: 'Advantage Home',
         };
@@ -24,9 +24,9 @@ export default class Home extends React.Component {
     }
 
     componentDidMount() {
-        const {currentUser} = firebase.auth();
+        const { currentUser } = firebase.auth();
         //console.log(currentUser);
-        this.setState({currentUser: currentUser});
+        this.setState({ currentUser: currentUser });
     }
 
     tab1() {
@@ -34,7 +34,7 @@ export default class Home extends React.Component {
             <View>
                 <Card style={styles.cardSpace}>
                     <CardItem header bordered style={styles.container}>
-                        <Text style={{fontSize: 36, color: '#5987a7', textAlign:'center'}}>Mission Statement</Text>
+                        <Text style={{ fontSize: 36, color: '#5987a7', textAlign: 'center' }}>Mission Statement</Text>
                     </CardItem>
                     <CardItem>
                         <Body style={styles.container}>
@@ -44,7 +44,7 @@ export default class Home extends React.Component {
                 </Card>
                 <Card style={styles.cardSpace}>
                     <CardItem header bordered style={styles.container}>
-                        <Text style={{fontSize: 36, color: '#5987a7', textAlign: 'center'}}>The Advantage Difference</Text>
+                        <Text style={{ fontSize: 36, color: '#5987a7', textAlign: 'center' }}>The Advantage Difference</Text>
                     </CardItem>
                     <CardItem>
                         <Body style={styles.container}>
@@ -60,11 +60,11 @@ export default class Home extends React.Component {
                 </Card>
                 <Card style={styles.cardSpace}>
                     <CardItem header bordered style={styles.container}>
-                        <Text style={{fontSize: 36, color: '#5987a7', textAlign: 'center'}}>Free Estimate</Text>
+                        <Text style={{ fontSize: 36, color: '#5987a7', textAlign: 'center' }}>Free Estimate</Text>
                     </CardItem>
                     <CardItem>
                         <Body style={styles.container}>
-                            <Text style={styles.center}>Call us at 434.817.7222 for a Free Estimate or submit a <Text style={{color: 'blue'}} onPress={() => Linking.openURL('https://www.advantagehandy.com/get-a-free-estimate/')}>request for a free estimate.</Text></Text>
+                            <Text style={styles.center}>Call us at 434.817.7222 for a Free Estimate or submit a <Text style={{ color: 'blue' }} onPress={() => Linking.openURL('https://www.advantagehandy.com/get-a-free-estimate/')}>request for a free estimate.</Text></Text>
                         </Body>
                     </CardItem>
                 </Card>
@@ -198,7 +198,7 @@ export default class Home extends React.Component {
                 <Card style={styles.cardSpace}>
                     <CardItem header bordered style={styles.container}>
                         {/* <Text style={{fontSize: 36, color: '#5987a7'}}>Where Are We?</Text> */}
-                        <Image style={{width: 320, height: 300}} source={require('../../assets/icons/AHCStaffPhoto.jpg')} />
+                        <Image style={{ width: 320, height: 300 }} source={require('../../assets/icons/AHCStaffPhoto.jpg')} />
                     </CardItem>
                     <CardItem>
                         <Body style={styles.container}>
@@ -225,40 +225,40 @@ export default class Home extends React.Component {
                             <Text style={styles.center}>
                                 Servicing Charlottesville and surrounding area since 2000{"\n"}
                             </Text>
-                            <View style={{flex:1,height:100,justifyContent: 'center', alignItems: 'center',flexDirection: 'row'}}>
-                                <Image style={{flex:1, resizeMode: 'contain', marginRight: 10}} source={require('../../assets/icons/ReadersChoice.jpg')} />
-                                <Image style={{flex:1, resizeMode: 'contain', marginRight: 10}} source={require('../../assets/icons/BestinCVille.jpg')} />
-                                <Image style={{flex:1, resizeMode: 'contain'}} source={require('../../assets/icons/CharlottesvilleFamilyAward.jpg')} />
+                            <View style={{ flex: 1, height: 90, justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
+                                <Image style={{ flex: 1, resizeMode: 'contain', marginRight: 10 }} source={require('../../assets/icons/ReadersChoice.jpg')} />
+                                <Image style={{ flex: 1, resizeMode: 'contain', marginRight: 10 }} source={require('../../assets/icons/BestinCVille.jpg')} />
+                                <Image style={{ flex: 1, resizeMode: 'contain' }} source={require('../../assets/icons/CharlottesvilleFamilyAward.jpg')} />
                             </View>
                             <Text style={styles.center}>
                                 {"\n"}BBB A+ Rating{"\n"}
-                            </Text>                                
-
-                            <Image style={{width: 127, height: 140}} source={require('../../assets/icons/BBBRating.jpg')} />
-
-                            <Text style={styles.center}>
-                            {"\n"}Locally owned and operated{"\n"}
                             </Text>
 
-                            <Image style={{width: 320, height: 240}} source={require('../../assets/icons/AHCOffice.jpg')} />
-                            <Text style={[styles.center, {marginTop: 20,}]}>
-                            <Text style={{fontWeight: 'bold', textAlign: 'center'}}>Our address</Text>
-{'\n'}516 Brookway Drive
+                            <Image style={{ width: 127, height: 140 }} source={require('../../assets/icons/BBBRating.jpg')} />
+
+                            <Text style={styles.center}>
+                                {"\n"}Locally owned and operated{"\n"}
+                            </Text>
+
+                            <Image style={{ width: 320, height: 240 }} source={require('../../assets/icons/AHCOffice.jpg')} />
+                            <Text style={[styles.center, { marginTop: 20, }]}>
+                                <Text style={{ fontWeight: 'bold', textAlign: 'center' }}>Our address</Text>
+                                {'\n'}516 Brookway Drive
 {'\n'}Charlottesville, VA 22901
 {'\n'}P: 434-817-7222
 {'\n\n'}Website:
-{'\n'}<Text style={{color: 'blue'}} onPress={() => Linking.openURL('www.advantagehandy.com')}>www.advantagehandy.com
+{'\n'}<Text style={{ color: 'blue' }} onPress={() => Linking.openURL('www.advantagehandy.com')}>www.advantagehandy.com
 </Text></Text>
                         </Body>
                     </CardItem>
                 </Card>
                 <Card>
                     <CardItem header bordered style={styles.container}>
-                        <Text style={{fontSize: 36, color: '#5987a7', textAlign: 'center'}}>Credits</Text>
+                        <Text style={{ fontSize: 36, color: '#5987a7', textAlign: 'center' }}>Credits</Text>
                     </CardItem>
                     <CardItem>
                         <Body style={styles.container}>
-                            <Text style={{textAlign: 'center'}}>Developed By: {'\n'}Jesse Du{'\n'}Sean Castrina{'\n'}Collin Castrina{'\n\n'}Published By: {'\n'}Champion Publishing</Text>
+                            <Text style={{ textAlign: 'center' }}>Developed By: {'\n'}Jesse Du{'\n'}Sean Castrina{'\n'}Collin Castrina{'\n\n'}Published By: {'\n'}Champion Publishing</Text>
                         </Body>
                     </CardItem>
                 </Card>
@@ -271,36 +271,37 @@ export default class Home extends React.Component {
 
         return (
             <Container>
-                    <View style={{backgroundColor: "white", height: 20}} />
-                    <View
-                        style={{backgroundColor:'#3A5872',alignItems:'center'}}
-                    >
-                        <Image
-                            source={require('../../assets/logo.png')}
-                            style={{height: 100,width: '50%'}}
-                        />
-                    </View>
-                    <Tabs
-                        locked
-                        tabBarUnderlineStyle={{backgroundColor: '#3A5872'}}
-                        renderTabBar={() => <ScrollableTab />}
-                    >
-                        <Tab heading="The Advantage Difference" style={styles.tab} activeTextStyle={{color: '#3A5872'}}>
-                            <ScrollView>
-                                {this.tab1()}
-                            </ScrollView>
-                        </Tab>
-                        <Tab heading="Services" style={styles.tab} activeTextStyle={{color: '#3A5872'}}>
-                            <ScrollView>
-                                {this.tab2()}
-                            </ScrollView>
-                        </Tab>
-                        <Tab heading="About Us" style={styles.tab} activeTextStyle={{color: '#3A5872'}}>
-                            <ScrollView>
-                                {this.tab3()}
-                            </ScrollView>
-                        </Tab>
-                    </Tabs>
+                <View style={{ backgroundColor: "white", height: 20 }} />
+                <View
+                    style={{ backgroundColor: '#3A5872', alignItems: 'center' }}
+                >
+                    <Image
+                        source={require('../../assets/logo.png')}
+                        style={{ height: 90, width: '50%' }}
+                        resizeMode="contain"
+                    />
+                </View>
+                <Tabs
+                    locked
+                    tabBarUnderlineStyle={{ backgroundColor: '#3A5872' }}
+                    renderTabBar={() => <ScrollableTab />}
+                >
+                    <Tab heading="The Advantage Difference" style={styles.tab} activeTextStyle={{ color: '#3A5872' }}>
+                        <ScrollView>
+                            {this.tab1()}
+                        </ScrollView>
+                    </Tab>
+                    <Tab heading="Services" style={styles.tab} activeTextStyle={{ color: '#3A5872' }}>
+                        <ScrollView>
+                            {this.tab2()}
+                        </ScrollView>
+                    </Tab>
+                    <Tab heading="About Us" style={styles.tab} activeTextStyle={{ color: '#3A5872' }}>
+                        <ScrollView>
+                            {this.tab3()}
+                        </ScrollView>
+                    </Tab>
+                </Tabs>
 
             </Container>
         );

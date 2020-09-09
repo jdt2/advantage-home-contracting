@@ -23,47 +23,86 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
 // 1. Deploys as dbUsersOnUpdate
 const functions = require('firebase-functions')
 const nodemailer = require('nodemailer')
+const Firestore = require('@google-cloud/firestore');
+const PROJECTID = 'advantage-home';
+const firestore = new Firestore({
+    projectId: PROJECTID,
+})
 //const admin = require('firebase-admin')
+/* const mailgun = require('mailgun-js')({ apiKey: "39bc661a-e2dfc08b", domain: "advantagehandy.com" }) */
 
-const hotmailEmail = functions.config().hotmail.email;
-const hotmailPassword = functions.config().hotmail.password;
+const gmailEmail = functions.config().gmail.email;
+const gmailPassword = functions.config().gmail.password;
+/* console.log(gmailEmail);
+console.log(gmailPassword); */
 const mailTransport = nodemailer.createTransport({
-    service: 'hotmail',
+    service: 'gmail',
     auth: {
-        user: hotmailEmail,
-        pass: hotmailPassword,
+        user: gmailEmail,
+        pass: gmailPassword,
     },
 });
 
 // Your company name to include in the emails
-const APP_NAME = 'Advantage-Home';
+const APP_NAME = 'Advantage-Home-Contracting';
 
 // [START sendWelcomeEmail]
 /**
  * Sends a welcome email to new user.
  */
 // [START onCreateTrigger]
-exports.sendEmail = functions.firestore.document('users/{uid}').onCreate((snap, context) => {
+exports.sendEmail = functions.firestore.document('requests/{id}').onCreate((snap, context) => {
     //const snapshot = event.data;
-    console.log(snap);
+    //console.log(snap);
+    const id = context.params.id;
     const user = snap.data();
+    console.log(id);
+    user["id"] = id;
 
-    return sendEmail(user.email);
+    return sendEmail(user);
 });
 // [END sendWelcomeEmail]
 
 // Sends a welcome email to the given user.
-async function sendEmail(email) {
+async function sendEmail(request) {
+
+    let data = await firestore.collection("users").doc(request.userId).get().then(doc => {
+        const data = doc.data();
+        return data;
+    })
+
+
+    let name = data.name;
+    let email = data.email;
+
+    console.log(name);
+    console.log(email);
+    console.log(request);
+
+    // MAIL OPTIONS FOR PRODUCTION
     const mailOptions = {
-        from: `${APP_NAME} <noreply@firebase.com>`,
-        to: `jessejesse10@gmail.com`,
+        from: `${name} <noreply@firebase.com>`,
+        to: `advantagehandy@yahoo.com`,
     };
 
+    /* const mailOptions = {
+        from: `${name} <noreply@firebase.com>`,
+        to: `jessejesse10@gmail.com`,
+    }; */
+
     // The user subscribed to the newsletter.
-    mailOptions.subject = `Welcome to ${APP_NAME}!`;
-    mailOptions.text = `Hey Jesse! Welcome to ${APP_NAME}. I hope you will enjoy our service.`;
+    mailOptions.subject = `New Estimate Request from ${email}!`;
+    mailOptions.html = `
+        <img src="${request.imageURL}"><br>
+        <p style="font-weight: bold;">Job Description: ${request.jobDesc}<br>
+        Reference: ${request.refer}<br>
+        Timestamp: ${request.timestamp.toDate().toString()}<br>
+        Change Status/View Estimate: <a href='https://jdt2.github.io/advantage-home-contracting/?id=${request.id}'>Here</a>
+        </p>
+    `;
+    console.log(mailOptions);
     await mailTransport.sendMail(mailOptions);
-    console.log('New welcome email sent to:', email);
+    console.log('New request sent from:', email);
     return null;
 }
 

@@ -184,6 +184,7 @@ export default class Request extends React.Component {
                 //other: this.state.other,
                 userId: userId,
                 imageURL: downloadURL,
+                status: "Submitted"
             })
 
             const doc_id = doc_ref.id;
@@ -232,7 +233,7 @@ export default class Request extends React.Component {
                 >
 
                     <Text style={{ fontSize: 24, marginTop: 70, }}>Request Sent!</Text>
-                    <Text style={{ fontSize: 18, marginTop: 20, textAlign: 'center', marginHorizontal: 10 }}>Expect an email soon and you can view your request in
+                    <Text style={{ fontSize: 18, marginTop: 20, textAlign: 'center', marginHorizontal: 10 }}>Check the progress in
                                 {"\n"}
                         <Icon
                             name={"person-outline"}
